@@ -5,7 +5,7 @@ export const PALETTE = {
   primary: '#1B2A41',   // Azul Principal
   accent: '#E31B23',    // Vermelho Principal
   secondary: '#6C7579', // Azul Claro / Slate
-  background: '#F8FAFC', // Off White
+  background: '#f2f4f7', // Off White
   white: '#FFFFFF',
   
   // States

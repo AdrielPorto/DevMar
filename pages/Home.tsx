@@ -40,10 +40,8 @@ const Home: React.FC = () => {
           </ScrollReveal>
         </div>
 
-        {/* Background Decorative Element (pode ficar fora do ScrollReveal ou dentro) */}
-        <div className="absolute top-0 right-0 -translate-y-12 translate-x-1/4 opacity-5 hidden lg:block">
-          {/* ... SVG ... */}
-        </div>
+        {/* Background Decorative Element */}
+       
       </section>
 
       {/* Pillars Section (AGORA COM FLIP CARD) */}
@@ -128,23 +126,21 @@ const Home: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-brand-blue py-20">
-        <ScrollReveal>
-          <div className="max-w-4xl mx-auto px-4 text-center">
-            <Rocket className="h-12 w-12 text-brand-red mx-auto mb-6" />
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-6">
-              Acelere sua transformação digital
-            </h2>
-            <p className="text-gray-300 text-lg mb-10">
-              A DevMar oferece a robustez técnica que sua empresa precisa com a flexibilidade que o mercado exige.
-            </p>
-            <Link to="/contato">
-              <Button variant="primary" className="text-lg px-8 py-4">
-                Solicitar Orçamento
-              </Button>
-            </Link>
-          </div>
-        </ScrollReveal>
+      <section className="bg-brand-bg py-20">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <Rocket className="h-12 w-12 text-brand-red mx-auto mb-6" />
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-brand-blue mb-6">
+            Acelere sua transformação digital
+          </h2>
+          <p className="text-brand-slate text-lg mb-10">
+            A DevMar oferece a robustez técnica que sua empresa precisa com a flexibilidade que o mercado exige.
+          </p>
+          <Link to="/contato">
+            <Button variant="primary" className="text-lg px-8 py-4">
+              Solicitar Orçamento
+            </Button>
+          </Link>
+        </div>
       </section>
     </div>
   );

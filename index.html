@@ -29,7 +29,7 @@
                 red: '#E31B23',     // Vermelho Principal
                 slate: '#6C7579',   // Azul Claro/Cinza (Secondary provided hex)
                 light: '#FFFFFF',   // Neutro
-                bg: '#F8FAFC',      // Background Lighter
+                bg: '#f2f4f7',      // Background Lighter
                 // Generated States
                 'red-hover': '#C4161D',
                 'blue-hover': '#131E2F',
@@ -61,5 +61,31 @@
   <body>
     <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
+  <script>
+    // Garante que a página sempre comece no topo ao recarregar
+    window.addEventListener('beforeunload', function() {
+      window.scrollTo(0, 0);
+    });
+    
+    // Também rola para o topo quando a página carrega
+    window.addEventListener('load', function() {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    });
+    
+    // Executa imediatamente se a página já estiver carregada
+    if (document.readyState === 'complete') {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    } else {
+      document.addEventListener('DOMContentLoaded', function() {
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+      });
+    }
+  </script>
 </body>
 </html>
