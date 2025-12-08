@@ -30,6 +30,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({ children, delay = 0, classN
         delay: delay, 
         ease: [0.17, 0.67, 0.83, 0.67] // Custom ease para um movimento suave
       }}
+      style={{ pointerEvents: 'auto' }}
     >
       {children}
     </motion.div>

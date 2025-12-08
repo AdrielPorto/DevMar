@@ -10,7 +10,10 @@
     perspective: 1000px;
     height: 250px;
     cursor: pointer;
-    z-index: 10; 
+    z-index: 10;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
 }
 
 .benefit-card {
@@ -25,7 +28,7 @@
 }
 
 /* Desktop: hover para flip */
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
     .flip-card-container:hover .benefit-card {
         transform: rotateY(180deg);
     }

@@ -18,6 +18,12 @@ const Home: React.FC = () => {
     }));
   };
 
+  const handleCardClick = (e: React.MouseEvent | React.TouchEvent, index: number) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleCard(index);
+  };
+
   return (
     <div className="w-full">
       
@@ -56,7 +62,8 @@ const Home: React.FC = () => {
             <ScrollReveal delay={0.1}>
               <div 
                 className={`flip-card-container h-[250px] ${flippedCards[0] ? 'flipped' : ''}`}
-                onClick={() => toggleCard(0)}
+                onClick={(e) => handleCardClick(e, 0)}
+                onTouchEnd={(e) => handleCardClick(e, 0)}
               >
                 <div className="benefit-card">
                   <div className="card-front flex flex-col items-center justify-center p-6 rounded-2xl bg-brand-bg border border-brand-slate/10 group">
@@ -80,7 +87,8 @@ const Home: React.FC = () => {
             <ScrollReveal delay={0.3}>
               <div 
                 className={`flip-card-container h-[250px] ${flippedCards[1] ? 'flipped' : ''}`}
-                onClick={() => toggleCard(1)}
+                onClick={(e) => handleCardClick(e, 1)}
+                onTouchEnd={(e) => handleCardClick(e, 1)}
               >
                 <div className="benefit-card">
                   <div className="card-front flex flex-col items-center justify-center p-6 rounded-2xl bg-brand-bg border border-brand-slate/10 group">
@@ -104,7 +112,8 @@ const Home: React.FC = () => {
             <ScrollReveal delay={0.5}>
               <div 
                 className={`flip-card-container h-[250px] ${flippedCards[2] ? 'flipped' : ''}`}
-                onClick={() => toggleCard(2)}
+                onClick={(e) => handleCardClick(e, 2)}
+                onTouchEnd={(e) => handleCardClick(e, 2)}
               >
                 <div className="benefit-card">
                   <div className="card-front flex flex-col items-center justify-center p-6 rounded-2xl bg-brand-bg border border-brand-slate/10 group">
