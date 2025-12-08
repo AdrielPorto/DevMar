@@ -1,12 +1,20 @@
 // src/pages/Home.tsx
 
-import React from 'react';
+import React, { useState } from 'react';
 import { ArrowRight, Code2, Users, ShieldCheck, Rocket } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import ScrollReveal from '../components/ScrollReveal.tsx'; // Importe o novo componente
 
 const Home: React.FC = () => {
+  const [flippedCards, setFlippedCards] = useState<{ [key: number]: boolean }>({});
+
+  const toggleCard = (index: number) => {
+    setFlippedCards(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
   return (
     <div className="w-full">
       
@@ -48,7 +56,10 @@ const Home: React.FC = () => {
             {/* CARD 1: Desenvolvimento Customizado (Flip Card) */}
             {/* O delay faz com que os cards apareçam em sequência */}
             <ScrollReveal delay={0.1}>
-              <div className="flip-card-container h-[250px]">
+              <div 
+                className={`flip-card-container h-[250px] ${flippedCards[0] ? 'flipped' : ''}`}
+                onClick={() => toggleCard(0)}
+              >
                 <div className="benefit-card">
                   {/* Frente do Cartão: Título e Ícone */}
                   <div className="card-front flex flex-col items-center justify-center p-6 rounded-2xl bg-brand-bg border border-brand-slate/10 group">
@@ -72,7 +83,10 @@ const Home: React.FC = () => {
 
             {/* CARD 2: Consultoria Especializada (Flip Card) */}
             <ScrollReveal delay={0.3}>
-              <div className="flip-card-container h-[250px]">
+              <div 
+                className={`flip-card-container h-[250px] ${flippedCards[1] ? 'flipped' : ''}`}
+                onClick={() => toggleCard(1)}
+              >
                 <div className="benefit-card">
                   {/* Frente do Cartão: Título e Ícone */}
                   <div className="card-front flex flex-col items-center justify-center p-6 rounded-2xl bg-brand-bg border border-brand-slate/10 group">
@@ -96,7 +110,10 @@ const Home: React.FC = () => {
 
             {/* CARD 3: IA e Segurança (Flip Card) */}
             <ScrollReveal delay={0.5}>
-              <div className="flip-card-container h-[250px]">
+              <div 
+                className={`flip-card-container h-[250px] ${flippedCards[2] ? 'flipped' : ''}`}
+                onClick={() => toggleCard(2)}
+              >
                 <div className="benefit-card">
                   {/* Frente do Cartão: Título e Ícone */}
                   <div className="card-front flex flex-col items-center justify-center p-6 rounded-2xl bg-brand-bg border border-brand-slate/10 group">

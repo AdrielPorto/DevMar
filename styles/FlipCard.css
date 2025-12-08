@@ -24,7 +24,15 @@
     border-radius: 12px;
 }
 
-.flip-card-container:hover .benefit-card {
+/* Desktop: hover para flip */
+@media (hover: hover) {
+    .flip-card-container:hover .benefit-card {
+        transform: rotateY(180deg);
+    }
+}
+
+/* Mobile: classe flipped para toggle via click */
+.flip-card-container.flipped .benefit-card {
     transform: rotateY(180deg);
 }
 
