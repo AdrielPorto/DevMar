@@ -93,7 +93,7 @@ export const ptBR = {
     whatsapp: 'WhatsApp',
     whatsappHours: 'Seg a Sex, 9h às 18h',
     headquarters: 'Sede',
-    location: 'Maricá - Rio de Janeiro',
+    location: 'R. Ver. Luiz Antonio da Cunha, 310 - Maricá - Rio de Janeiro',
     
     formTitle: 'Envie uma mensagem',
     nameLabel: 'Seu Nome',
@@ -160,7 +160,7 @@ export const ptBR = {
     ai: 'Inteligência Artificial',
     cloud: 'Cloud Computing',
     contact: 'Contato',
-    location: 'Maricá, RJ - Brasil',
+    location: 'R. Ver. Luiz Antonio da Cunha, 310 - Maricá - Rio de Janeiro',
     rights: 'Todos os direitos reservados.',
     privacy: 'Privacidade',
     terms: 'Termos',

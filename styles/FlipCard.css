@@ -27,6 +27,13 @@
     border-radius: 12px;
 }
 
+/* Mobile: desabilita hover - apenas clique funciona */
+@media (hover: none) and (pointer: coarse) {
+    .flip-card-container:hover .benefit-card {
+        transform: none !important;
+    }
+}
+
 /* Desktop: hover para flip */
 @media (hover: hover) and (pointer: fine) {
     .flip-card-container:hover .benefit-card {
@@ -34,7 +41,7 @@
     }
 }
 
-/* Mobile: classe flipped para toggle via click */
+/* Classe flipped funciona sempre (mobile e desktop quando clicado) */
 .flip-card-container.flipped .benefit-card {
     transform: rotateY(180deg);
 }

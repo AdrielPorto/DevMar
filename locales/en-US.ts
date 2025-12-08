@@ -93,7 +93,7 @@ export const enUS = {
     whatsapp: 'WhatsApp',
     whatsappHours: 'Mon to Fri, 9am to 6pm',
     headquarters: 'Headquarters',
-    location: 'Maricá - Rio de Janeiro',
+    location: 'R. Ver. Luiz Antonio da Cunha, 310 - Maricá - Rio de Janeiro',
     
     formTitle: 'Send a message',
     nameLabel: 'Your Name',

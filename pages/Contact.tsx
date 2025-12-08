@@ -59,7 +59,7 @@ const Contact: React.FC = () => {
                     </div>
                     <div>
                       <p className="font-semibold text-brand-blue">{t.contact.whatsapp}</p>
-                      <p className="text-brand-slate">+55 (21) 99999-9999</p>
+                      <p className="text-brand-slate">+55 (21) 96975-4036</p>
                       <p className="text-brand-slate text-sm mt-1">{t.contact.whatsappHours}</p>
                     </div>
                   </li>
