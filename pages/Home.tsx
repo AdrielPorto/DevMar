@@ -30,11 +30,7 @@ const Home: React.FC = () => {
                     Ver Serviços <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
-                <Link to="/iniciar-projeto">
-                  <Button variant="outline" className="w-full sm:w-auto">
-                    Iniciar Projeto
-                  </Button>
-                </Link>
+
               </div>
             </div>
           </ScrollReveal>
