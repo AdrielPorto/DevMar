@@ -131,11 +131,6 @@ const Home: React.FC = () => {
           <p className="text-brand-slate text-lg mb-10">
             A DevMar oferece a robustez técnica que sua empresa precisa com a flexibilidade que o mercado exige.
           </p>
-          <Link to="/iniciar-projeto">
-            <Button variant="primary" className="text-lg px-8 py-4">
-              Solicitar Orçamento
-            </Button>
-          </Link>
         </div>
       </section>
     </div>

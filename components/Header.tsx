@@ -38,12 +38,12 @@ const Header: React.FC = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8 items-center">
+          <nav className="hidden md:flex space-x-4 lg:space-x-8 items-center">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`text-sm font-medium transition-colors duration-200 ${
+                className={`text-sm font-medium whitespace-nowrap transition-colors duration-200 ${
                   isActive(item.path)
                     ? 'text-brand-red font-semibold'
                     : 'text-brand-slate hover:text-brand-blue'
