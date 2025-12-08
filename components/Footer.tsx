@@ -1,5 +1,5 @@
 import React from 'react';
-import { Code2, Github, Twitter, Linkedin, Mail } from 'lucide-react';
+import { Code2, Github, Twitter, Linkedin, Mail, Instagram } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
@@ -28,7 +28,7 @@ const Footer: React.FC = () => {
                 <Linkedin className="h-5 w-5" />
               </a>
               <a href="#" className="text-gray-300 hover:text-brand-red transition-colors">
-                <Twitter className="h-5 w-5" />
+                <Instagram className="h-5 w-5" />
               </a>
             </div>
           </div>
