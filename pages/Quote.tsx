@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { ArrowRight, FileText, Calendar, DollarSign, Building2, User, Mail, MessageSquare, ChevronDown } from 'lucide-react';
 import Button from '../components/Button';
 import ScrollReveal from '../components/ScrollReveal';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Quote: React.FC = () => {
+  const { t } = useLanguage();
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -15,19 +17,19 @@ const Quote: React.FC = () => {
   });
 
   const services = [
-    'Desenvolvimento de Software',
-    'Consultoria em TI',
-    'Suporte e Infraestrutura',
-    'Dados e Cloud',
-    'Portais e Marketing Digital',
-    'IA e Automação',
-    'Segurança e Qualidade',
-    'Treinamentos e Capacitação'
+    t.services.softwareDev,
+    t.services.consulting,
+    t.services.support,
+    t.services.dataCloud,
+    t.services.portals,
+    t.services.aiAutomation,
+    t.services.security,
+    t.services.training
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Obrigado! Recebemos sua solicitação de orçamento. Nossa equipe entrará em contato em breve para discutir os detalhes do seu projeto.');
+    alert(t.quote.successMessage);
     setFormState({
       name: '',
       email: '',
@@ -54,16 +56,15 @@ const Quote: React.FC = () => {
         <div className="text-center mb-12">
           <ScrollReveal>
             <h1 className="text-4xl md:text-5xl font-display font-bold text-brand-blue mb-4">
-              Iniciar Projeto
+              {t.quote.title}
             </h1>
             <p className="text-brand-slate text-lg max-w-2xl mx-auto">
-              Preencha o formulário abaixo para solicitar um orçamento personalizado. 
-              Nossa equipe analisará sua necessidade e retornará com uma proposta detalhada.
+              {t.quote.subtitle}
             </p>
           </ScrollReveal>
         </div>
 
-        {/* Formulário de Orçamento */}
+        {/* Form */}
         <ScrollReveal delay={0.2}>
           <div className="bg-white p-8 md:p-10 rounded-2xl shadow-lg border-t-4 border-brand-red">
             <div className="flex items-center gap-3 mb-8">
@@ -71,7 +72,7 @@ const Quote: React.FC = () => {
                 <FileText className="h-6 w-6 text-brand-red" />
               </div>
               <h2 className="text-2xl font-display font-bold text-brand-blue">
-                Solicitar Orçamento
+                {t.quote.formTitle}
               </h2>
             </div>
 
@@ -81,14 +82,14 @@ const Quote: React.FC = () => {
                 <div>
                   <label htmlFor="name" className="flex items-center gap-2 text-sm font-medium text-brand-slate mb-2">
                     <User className="h-4 w-4" />
-                    Nome Completo
+                    {t.quote.nameLabel}
                   </label>
                   <input
                     type="text"
                     id="name"
                     required
                     className="w-full px-4 py-3 rounded-lg bg-brand-bg border border-brand-slate/20 focus:border-brand-red focus:bg-white focus:ring-2 focus:ring-brand-red/20 transition-all text-brand-blue"
-                    placeholder="Seu nome"
+                    placeholder={t.quote.namePlaceholder}
                     value={formState.name}
                     onChange={handleChange}
                   />
@@ -96,14 +97,14 @@ const Quote: React.FC = () => {
                 <div>
                   <label htmlFor="email" className="flex items-center gap-2 text-sm font-medium text-brand-slate mb-2">
                     <Mail className="h-4 w-4" />
-                    Email Corporativo
+                    {t.quote.emailLabel}
                   </label>
                   <input
                     type="email"
                     id="email"
                     required
                     className="w-full px-4 py-3 rounded-lg bg-brand-bg border border-brand-slate/20 focus:border-brand-red focus:bg-white focus:ring-2 focus:ring-brand-red/20 transition-all text-brand-blue"
-                    placeholder="seu@empresa.com"
+                    placeholder={t.quote.emailPlaceholder}
                     value={formState.email}
                     onChange={handleChange}
                   />
@@ -115,14 +116,14 @@ const Quote: React.FC = () => {
                 <div>
                   <label htmlFor="company" className="flex items-center gap-2 text-sm font-medium text-brand-slate mb-2">
                     <Building2 className="h-4 w-4" />
-                    Empresa / Organização
+                    {t.quote.companyLabel}
                   </label>
                   <input
                     type="text"
                     id="company"
                     required
                     className="w-full px-4 py-3 rounded-lg bg-brand-bg border border-brand-slate/20 focus:border-brand-red focus:bg-white focus:ring-2 focus:ring-brand-red/20 transition-all text-brand-blue"
-                    placeholder="Nome da empresa"
+                    placeholder={t.quote.companyPlaceholder}
                     value={formState.company}
                     onChange={handleChange}
                   />
@@ -130,7 +131,7 @@ const Quote: React.FC = () => {
                 <div>
                   <label htmlFor="service" className="flex items-center gap-2 text-sm font-medium text-brand-slate mb-2">
                     <FileText className="h-4 w-4" />
-                    Tipo de Serviço
+                    {t.quote.serviceLabel}
                   </label>
                   <div className="relative">
                     <select
@@ -140,7 +141,7 @@ const Quote: React.FC = () => {
                       value={formState.service}
                       onChange={handleChange}
                     >
-                      <option value="">Selecione um serviço</option>
+                      <option value="">{t.quote.servicePlaceholder}</option>
                       {services.map((service, index) => (
                         <option key={index} value={service}>
                           {service}
@@ -156,14 +157,14 @@ const Quote: React.FC = () => {
               <div>
                 <label htmlFor="description" className="flex items-center gap-2 text-sm font-medium text-brand-slate mb-2">
                   <MessageSquare className="h-4 w-4" />
-                  Descreva seu Projeto
+                  {t.quote.descriptionLabel}
                 </label>
                 <textarea
                   id="description"
                   required
                   rows={5}
                   className="w-full px-4 py-3 rounded-lg bg-brand-bg border border-brand-slate/20 focus:border-brand-red focus:bg-white focus:ring-2 focus:ring-brand-red/20 transition-all text-brand-blue resize-none"
-                  placeholder="Descreva detalhadamente o que você precisa: objetivos, funcionalidades desejadas, público-alvo, integrações necessárias, etc."
+                  placeholder={t.quote.descriptionPlaceholder}
                   value={formState.description}
                   onChange={handleChange}
                 ></textarea>
@@ -174,7 +175,7 @@ const Quote: React.FC = () => {
                 <div>
                   <label htmlFor="deadline" className="flex items-center gap-2 text-sm font-medium text-brand-slate mb-2">
                     <Calendar className="h-4 w-4" />
-                    Prazo Estimado
+                    {t.quote.deadlineLabel}
                   </label>
                   <div className="relative">
                     <select
@@ -183,12 +184,12 @@ const Quote: React.FC = () => {
                       value={formState.deadline}
                       onChange={handleChange}
                     >
-                      <option value="">Selecione um prazo</option>
-                      <option value="urgente">Urgente (até 1 mês)</option>
-                      <option value="curto">Curto prazo (1-3 meses)</option>
-                      <option value="medio">Médio prazo (3-6 meses)</option>
-                      <option value="longo">Longo prazo (6+ meses)</option>
-                      <option value="flexivel">Prazo flexível</option>
+                      <option value="">{t.quote.deadlinePlaceholder}</option>
+                      <option value="urgente">{t.quote.deadlineUrgent}</option>
+                      <option value="curto">{t.quote.deadlineShort}</option>
+                      <option value="medio">{t.quote.deadlineMedium}</option>
+                      <option value="longo">{t.quote.deadlineLong}</option>
+                      <option value="flexivel">{t.quote.deadlineFlexible}</option>
                     </select>
                     <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-brand-slate pointer-events-none" />
                   </div>
@@ -196,7 +197,7 @@ const Quote: React.FC = () => {
                 <div>
                   <label htmlFor="budget" className="flex items-center gap-2 text-sm font-medium text-brand-slate mb-2">
                     <DollarSign className="h-4 w-4" />
-                    Faixa de Orçamento
+                    {t.quote.budgetLabel}
                   </label>
                   <div className="relative">
                     <select
@@ -205,13 +206,13 @@ const Quote: React.FC = () => {
                       value={formState.budget}
                       onChange={handleChange}
                     >
-                      <option value="">Selecione uma faixa</option>
-                      <option value="ate-10k">Até R$ 10.000</option>
-                      <option value="10k-50k">R$ 10.000 - R$ 50.000</option>
-                      <option value="50k-100k">R$ 50.000 - R$ 100.000</option>
-                      <option value="100k-500k">R$ 100.000 - R$ 500.000</option>
-                      <option value="acima-500k">Acima de R$ 500.000</option>
-                      <option value="a-definir">A definir</option>
+                      <option value="">{t.quote.budgetPlaceholder}</option>
+                      <option value="ate-10k">{t.quote.budgetTo10k}</option>
+                      <option value="10k-50k">{t.quote.budget10kTo50k}</option>
+                      <option value="50k-100k">{t.quote.budget50kTo100k}</option>
+                      <option value="100k-500k">{t.quote.budget100kTo500k}</option>
+                      <option value="acima-500k">{t.quote.budgetAbove500k}</option>
+                      <option value="a-definir">{t.quote.budgetTbd}</option>
                     </select>
                     <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-brand-slate pointer-events-none" />
                   </div>
@@ -221,33 +222,32 @@ const Quote: React.FC = () => {
               {/* Botão de Envio */}
               <div className="pt-4">
                 <Button type="submit" variant="primary" className="w-full justify-center text-lg py-4">
-                  Solicitar Orçamento <ArrowRight className="ml-2 h-5 w-5" />
+                  {t.quote.submitButton} <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 <p className="text-sm text-brand-slate text-center mt-4">
-                  Ao enviar, você concorda em receber uma proposta comercial da DevMar. 
-                  Seus dados estão seguros e serão usados apenas para contato sobre este projeto.
+                  {t.quote.disclaimer}
                 </p>
               </div>
             </form>
           </div>
         </ScrollReveal>
 
-        {/* Informações Adicionais */}
+        {/* Info */}
         <ScrollReveal delay={0.4}>
           <div className="mt-12 bg-white p-6 rounded-xl border border-brand-slate/10">
-            <h3 className="text-lg font-bold text-brand-blue mb-4">O que acontece depois?</h3>
+            <h3 className="text-lg font-bold text-brand-blue mb-4">{t.quote.whatHappens}</h3>
             <ol className="space-y-3 text-brand-slate">
               <li className="flex items-start gap-3">
                 <span className="bg-brand-red text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">1</span>
-                <span>Nossa equipe analisará sua solicitação em até 24 horas úteis.</span>
+                <span>{t.quote.step1}</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="bg-brand-red text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">2</span>
-                <span>Entraremos em contato para esclarecer dúvidas e entender melhor suas necessidades.</span>
+                <span>{t.quote.step2}</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="bg-brand-red text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">3</span>
-                <span>Enviaremos uma proposta comercial detalhada com escopo, prazos e investimento.</span>
+                <span>{t.quote.step3}</span>
               </li>
             </ol>
           </div>
@@ -258,4 +258,3 @@ const Quote: React.FC = () => {
 };
 
 export default Quote;
-

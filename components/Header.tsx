@@ -1,28 +1,38 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
-import { NavItem } from '../types';
-
-const NAV_ITEMS: NavItem[] = [
-  { label: 'Início', path: '/' },
-  { label: 'Sobre', path: '/sobre' },
-  { label: 'Serviços', path: '/servicos' },
-  { label: 'Contato', path: '/contato' },
-];
+import { Menu, X, Globe } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
+import { languages, Language } from '../locales';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [langMenuOpen, setLangMenuOpen] = useState(false);
   const location = useLocation();
+  const { language, setLanguage, t } = useLanguage();
+
+  const NAV_ITEMS = [
+    { label: t.nav.home, path: '/' },
+    { label: t.nav.about, path: '/sobre' },
+    { label: t.nav.services, path: '/servicos' },
+    { label: t.nav.contact, path: '/contato' },
+  ];
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const isActive = (path: string) => location.pathname === path;
+
+  const currentLang = languages.find(l => l.code === language);
+
+  const handleLanguageChange = (lang: Language) => {
+    setLanguage(lang);
+    setLangMenuOpen(false);
+  };
 
   return (
     <header className="fixed w-full bg-brand-light/95 backdrop-blur-md z-50 border-b border-brand-slate/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
 
-          {/* Logo (IMAGEM NOVA E TAMANHO AUMENTADO) */}
+          {/* Logo */}
           <Link to="/" className="flex items-center space-x-0 group">
             <div className="p-2 rounded-lg transition-colors duration-300">
               <img
@@ -52,10 +62,79 @@ const Header: React.FC = () => {
                 {item.label}
               </Link>
             ))}
+
+            {/* Language Selector - Desktop */}
+            <div className="relative">
+              <button
+                onClick={() => setLangMenuOpen(!langMenuOpen)}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-brand-slate hover:text-brand-blue hover:bg-brand-bg transition-colors"
+                aria-label="Select language"
+              >
+                <Globe className="h-4 w-4" />
+                <span className="hidden lg:inline">{currentLang?.flag}</span>
+              </button>
+
+              {langMenuOpen && (
+                <>
+                  <div 
+                    className="fixed inset-0 z-40" 
+                    onClick={() => setLangMenuOpen(false)}
+                  />
+                  <div className="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-brand-slate/10 py-1 z-50">
+                    {languages.map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => handleLanguageChange(lang.code)}
+                        className={`w-full px-4 py-2 text-left text-sm flex items-center gap-2 hover:bg-brand-bg transition-colors ${
+                          language === lang.code ? 'text-brand-red font-medium' : 'text-brand-slate'
+                        }`}
+                      >
+                        <span>{lang.flag}</span>
+                        <span>{lang.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
           </nav>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          {/* Mobile: Language + Menu Button */}
+          <div className="md:hidden flex items-center gap-2">
+            {/* Language Selector - Mobile */}
+            <div className="relative">
+              <button
+                onClick={() => setLangMenuOpen(!langMenuOpen)}
+                className="flex items-center gap-1 px-2 py-1.5 rounded-lg text-sm text-brand-slate hover:text-brand-blue transition-colors"
+                aria-label="Select language"
+              >
+                <span>{currentLang?.flag}</span>
+              </button>
+
+              {langMenuOpen && (
+                <>
+                  <div 
+                    className="fixed inset-0 z-40" 
+                    onClick={() => setLangMenuOpen(false)}
+                  />
+                  <div className="absolute right-0 mt-2 w-36 bg-white rounded-lg shadow-lg border border-brand-slate/10 py-1 z-50">
+                    {languages.map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => handleLanguageChange(lang.code)}
+                        className={`w-full px-4 py-2 text-left text-sm flex items-center gap-2 hover:bg-brand-bg transition-colors ${
+                          language === lang.code ? 'text-brand-red font-medium' : 'text-brand-slate'
+                        }`}
+                      >
+                        <span>{lang.flag}</span>
+                        <span>{lang.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+
             <button
               onClick={toggleMenu}
               className="text-brand-blue hover:text-brand-red focus:outline-none"

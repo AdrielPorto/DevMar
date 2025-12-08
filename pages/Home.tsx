@@ -4,10 +4,12 @@ import React, { useState } from 'react';
 import { ArrowRight, Code2, Users, ShieldCheck, Rocket } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
-import ScrollReveal from '../components/ScrollReveal.tsx'; // Importe o novo componente
+import ScrollReveal from '../components/ScrollReveal.tsx';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Home: React.FC = () => {
   const [flippedCards, setFlippedCards] = useState<{ [key: number]: boolean }>({});
+  const { t } = useLanguage();
 
   const toggleCard = (index: number) => {
     setFlippedCards(prev => ({
@@ -15,120 +17,107 @@ const Home: React.FC = () => {
       [index]: !prev[index]
     }));
   };
+
   return (
     <div className="w-full">
       
-      {/* Hero Section - Geralmente a primeira seção não precisa de scroll reveal */}
+      {/* Hero Section */}
       <section className="relative overflow-hidden bg-brand-bg pt-16 pb-32 lg:pt-24 lg:pb-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <ScrollReveal>
             <div className="max-w-3xl">
               <span className="inline-block py-1 px-3 rounded-full bg-brand-blue/10 text-brand-blue text-sm font-semibold mb-6">
-                Cooperativa de Tecnologia
+                {t.home.badge}
               </span>
               <h1 className="text-4xl md:text-6xl font-display font-bold text-brand-blue mb-6 leading-tight">
-                Tecnologia e inovação com <span className="text-brand-red">propósito</span> cooperativista.
+                {t.home.title} <span className="text-brand-red">{t.home.titleHighlight}</span> {t.home.titleEnd}
               </h1>
               <p className="text-lg md:text-xl text-brand-slate mb-10 max-w-2xl leading-relaxed">
-                Desenvolvimento de software, consultoria e soluções digitais avançadas. A DevMar conecta profissionais de elite para transformar o seu negócio.
+                {t.home.subtitle}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link to="/servicos">
                   <Button variant="primary" className="w-full sm:w-auto">
-                    Ver Serviços <ArrowRight className="ml-2 h-4 w-4" />
+                    {t.home.cta} <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
-
               </div>
             </div>
           </ScrollReveal>
         </div>
-
-        {/* Background Decorative Element */}
-       
       </section>
 
-      {/* Pillars Section (AGORA COM FLIP CARD) */}
+      {/* Pillars Section (FLIP CARDS) */}
       <section className="bg-white py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             
-            {/* CARD 1: Desenvolvimento Customizado (Flip Card) */}
-            {/* O delay faz com que os cards apareçam em sequência */}
+            {/* CARD 1 */}
             <ScrollReveal delay={0.1}>
               <div 
                 className={`flip-card-container h-[250px] ${flippedCards[0] ? 'flipped' : ''}`}
                 onClick={() => toggleCard(0)}
               >
                 <div className="benefit-card">
-                  {/* Frente do Cartão: Título e Ícone */}
                   <div className="card-front flex flex-col items-center justify-center p-6 rounded-2xl bg-brand-bg border border-brand-slate/10 group">
                     <div className="bg-brand-blue p-3 rounded-lg mb-6">
                       <Code2 className="h-6 w-6 text-white" />
                     </div>
                     <h3 className="text-xl font-display font-bold text-brand-blue mb-3 text-center">
-                      Desenvolvimento Customizado
+                      {t.home.card1Title}
                     </h3>
                   </div>
-                  
-                  {/* Verso do Cartão: Descrição */}
                   <div className="card-back flex flex-col items-center justify-center p-6 rounded-2xl">
                     <p className="text-white text-center">
-                      Softwares sob medida, Apps nativos e plataformas SaaS criados para as suas necessidades específicas.
+                      {t.home.card1Desc}
                     </p>
                   </div>
                 </div>
               </div>
             </ScrollReveal>
 
-            {/* CARD 2: Consultoria Especializada (Flip Card) */}
+            {/* CARD 2 */}
             <ScrollReveal delay={0.3}>
               <div 
                 className={`flip-card-container h-[250px] ${flippedCards[1] ? 'flipped' : ''}`}
                 onClick={() => toggleCard(1)}
               >
                 <div className="benefit-card">
-                  {/* Frente do Cartão: Título e Ícone */}
                   <div className="card-front flex flex-col items-center justify-center p-6 rounded-2xl bg-brand-bg border border-brand-slate/10 group">
                     <div className="bg-brand-blue p-3 rounded-lg mb-6">
                       <Users className="h-6 w-6 text-white" />
                     </div>
                     <h3 className="text-xl font-display font-bold text-brand-blue mb-3 text-center">
-                      Consultoria Especializada
+                      {t.home.card2Title}
                     </h3>
                   </div>
-                  
-                  {/* Verso do Cartão: Descrição */}
                   <div className="card-back flex flex-col items-center justify-center p-6 rounded-2xl">
                     <p className="text-white text-center">
-                      Diagnósticos de TI, Governança, Adequação à LGPD e planejamento estratégico tecnológico.
+                      {t.home.card2Desc}
                     </p>
                   </div>
                 </div>
               </div>
             </ScrollReveal>
 
-            {/* CARD 3: IA e Segurança (Flip Card) */}
+            {/* CARD 3 */}
             <ScrollReveal delay={0.5}>
               <div 
                 className={`flip-card-container h-[250px] ${flippedCards[2] ? 'flipped' : ''}`}
                 onClick={() => toggleCard(2)}
               >
                 <div className="benefit-card">
-                  {/* Frente do Cartão: Título e Ícone */}
                   <div className="card-front flex flex-col items-center justify-center p-6 rounded-2xl bg-brand-bg border border-brand-slate/10 group">
                     <div className="bg-brand-blue p-3 rounded-lg mb-6">
                       <ShieldCheck className="h-6 w-6 text-white" />
                     </div>
                     <h3 className="text-xl font-display font-bold text-brand-blue mb-3 text-center">
-                      IA e Segurança
+                      {t.home.card3Title}
                     </h3>
                   </div>
-                  
-                  {/* Verso do Cartão: Descrição */}
                   <div className="card-back flex flex-col items-center justify-center p-6 rounded-2xl">
                     <p className="text-white text-center">
-                      Soluções avançadas em Inteligência Artificial, Automação e Segurança da Informação (DevSecOps).
+                      {t.home.card3Desc}
                     </p>
                   </div>
                 </div>
@@ -143,10 +132,10 @@ const Home: React.FC = () => {
         <div className="max-w-4xl mx-auto px-4 text-center">
           <Rocket className="h-12 w-12 text-brand-red mx-auto mb-6" />
           <h2 className="text-3xl md:text-4xl font-display font-bold text-brand-blue mb-6">
-            Acelere sua transformação digital
+            {t.home.ctaTitle}
           </h2>
-          <p className="text-brand-slate text-lg mb-10">
-            A DevMar oferece a robustez técnica que sua empresa precisa com a flexibilidade que o mercado exige.
+          <p className="text-brand-slate text-lg">
+            {t.home.ctaSubtitle}
           </p>
         </div>
       </section>
