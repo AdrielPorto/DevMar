@@ -25,7 +25,7 @@ const Home: React.FC = () => {
                 Desenvolvimento de software, consultoria e soluções digitais avançadas. A DevMar conecta profissionais de elite para transformar o seu negócio.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/contato">
+                <Link to="/iniciar-projeto">
                   <Button className="w-full sm:w-auto">
                     Iniciar Projeto <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
@@ -135,7 +135,7 @@ const Home: React.FC = () => {
           <p className="text-brand-slate text-lg mb-10">
             A DevMar oferece a robustez técnica que sua empresa precisa com a flexibilidade que o mercado exige.
           </p>
-          <Link to="/contato">
+          <Link to="/iniciar-projeto">
             <Button variant="primary" className="text-lg px-8 py-4">
               Solicitar Orçamento
             </Button>

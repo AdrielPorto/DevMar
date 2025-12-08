@@ -66,13 +66,13 @@ const Services: React.FC = () => {
           {services.map((service, index) => (
             <ScrollReveal key={index} delay={index * 0.1}> {/* Sequência de revelação com delay crescente */}
               <div 
-                className="bg-white p-6 rounded-xl shadow-sm border border-brand-slate/10 hover:shadow-lg hover:border-brand-red/40 transition-all duration-300 group"
+                className="bg-white p-6 rounded-xl shadow-sm border border-brand-slate/10 hover:shadow-lg hover:border-brand-red/40 transition-all duration-300 group h-full flex flex-col"
               >
-                <div className="bg-brand-bg w-14 h-14 rounded-lg flex items-center justify-center text-brand-blue mb-6 group-hover:bg-brand-blue group-hover:text-brand-red transition-colors duration-300">
+                <div className="bg-brand-bg w-14 h-14 rounded-lg flex items-center justify-center text-brand-blue mb-6 group-hover:bg-brand-blue group-hover:text-brand-red transition-colors duration-300 flex-shrink-0">
                   {service.icon}
                 </div>
-                <h3 className="text-lg font-bold text-brand-blue mb-3">{service.title}</h3>
-                <p className="text-brand-slate text-sm leading-relaxed">
+                <h3 className="text-lg font-bold text-brand-blue mb-3 flex-shrink-0">{service.title}</h3>
+                <p className="text-brand-slate text-sm leading-relaxed flex-grow">
                   {service.desc}
                 </p>
               </div>
