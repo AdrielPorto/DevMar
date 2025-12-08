@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Code2 } from 'lucide-react'; // Changed icon to Code2 for Dev focus
+import { X } from 'lucide-react';
 import { NavItem } from '../types';
 import Button from './Button';
 
@@ -15,19 +15,23 @@ const Header: React.FC = () => {
   const location = useLocation();
 
   const toggleMenu = () => setIsOpen(!isOpen);
-
   const isActive = (path: string) => location.pathname === path;
 
   return (
     <header className="fixed w-full bg-brand-light/95 backdrop-blur-md z-50 border-b border-brand-slate/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 group">
-            <div className="bg-brand-blue p-2 rounded-lg group-hover:bg-brand-red transition-colors duration-300">
-              <Code2 className="h-6 w-6 text-white" />
+
+          {/* Logo (IMAGEM NOVA E TAMANHO AUMENTADO) */}
+          <Link to="/" className="flex items-center space-x-0 group">
+            <div className="p-2 rounded-lg transition-colors duration-300">
+              <img
+                src="/images/menu-icon.png"
+                alt="Logo DevMar"
+                className="h-10 w-10 object-contain"
+              />
             </div>
+
             <span className="font-display font-bold text-xl text-brand-blue tracking-tight">
               DevMar
             </span>
@@ -40,14 +44,15 @@ const Header: React.FC = () => {
                 key={item.path}
                 to={item.path}
                 className={`text-sm font-medium transition-colors duration-200 ${
-                  isActive(item.path) 
-                    ? 'text-brand-red font-semibold' 
+                  isActive(item.path)
+                    ? 'text-brand-red font-semibold'
                     : 'text-brand-slate hover:text-brand-blue'
                 }`}
               >
                 {item.label}
               </Link>
             ))}
+
             <Link to="/contato">
               <Button variant="primary" className="py-2 px-4 text-sm">
                 Fale Conosco
@@ -62,7 +67,15 @@ const Header: React.FC = () => {
               className="text-brand-blue hover:text-brand-red focus:outline-none"
               aria-label="Menu"
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isOpen ? (
+                <X className="h-6 w-6 text-brand-red" />
+              ) : (
+                <img
+                  src="/images/menu-icon.png"
+                  alt="Abrir Menu"
+                  className="h-6 w-6 object-contain"
+                />
+              )}
             </button>
           </div>
         </div>
@@ -86,9 +99,12 @@ const Header: React.FC = () => {
                 {item.label}
               </Link>
             ))}
+
             <div className="pt-4 pb-2 px-3">
-               <Link to="/contato" onClick={() => setIsOpen(false)}>
-                <Button variant="primary" className="w-full justify-center">Fale Conosco</Button>
+              <Link to="/contato" onClick={() => setIsOpen(false)}>
+                <Button className="w-full justify-center">
+                  Fale Conosco
+                </Button>
               </Link>
             </div>
           </div>

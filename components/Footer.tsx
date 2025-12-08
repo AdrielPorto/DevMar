@@ -10,8 +10,14 @@ const Footer: React.FC = () => {
           
           {/* Brand Column */}
           <div className="col-span-1 md:col-span-1">
-            <div className="flex items-center space-x-2 mb-4">
-              <Code2 className="h-6 w-6 text-brand-red" />
+            <div className="flex items-center space-x-0 mb-4">
+              <div className="p-2 rounded-lg transition-colors duration-300">
+              <img
+                src="/images/menu-icon.png"
+                alt="Logo DevMar"
+                className="h-10 w-10 object-contain"
+              />
+            </div>
               <span className="font-display font-bold text-xl text-white tracking-tight">
                 DevMar
               </span>

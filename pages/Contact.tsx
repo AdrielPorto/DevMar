@@ -125,7 +125,7 @@ const Contact: React.FC = () => {
                 </Button>
               </form>
             </div>
-          </ScrollReveal>
+          </ScrollReveal>                                                    
         </div>
       </div>
     </div>
