@@ -1,5 +1,6 @@
 import React from 'react';
 import { Code, Terminal, Server, BarChart, Globe, Cpu, Shield, GraduationCap } from 'lucide-react';
+import ScrollReveal from '../components/ScrollReveal'; // Importe o componente
 
 const Services: React.FC = () => {
   const services = [
@@ -47,30 +48,35 @@ const Services: React.FC = () => {
 
   return (
     <div className="w-full">
+      {/* Header */}
       <div className="bg-brand-blue text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-display font-bold mb-6">Nossos Serviços</h1>
-          <p className="text-xl text-gray-300 max-w-2xl">
-            Soluções completas baseadas nos mais altos padrões técnicos e em conformidade com nosso estatuto social.
-          </p>
+          <ScrollReveal> {/* Revela o header */}
+            <h1 className="text-4xl font-display font-bold mb-6">Nossos Serviços</h1>
+            <p className="text-xl text-gray-300 max-w-2xl">
+              Soluções completas baseadas nos mais altos padrões técnicos e em conformidade com nosso estatuto social.
+            </p>
+          </ScrollReveal>
         </div>
       </div>
 
+      {/* Grid de Serviços */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => (
-            <div 
-              key={index} 
-              className="bg-white p-6 rounded-xl shadow-sm border border-brand-slate/10 hover:shadow-lg hover:border-brand-red/40 transition-all duration-300 group"
-            >
-              <div className="bg-brand-bg w-14 h-14 rounded-lg flex items-center justify-center text-brand-blue mb-6 group-hover:bg-brand-blue group-hover:text-brand-red transition-colors duration-300">
-                {service.icon}
+            <ScrollReveal key={index} delay={index * 0.1}> {/* Sequência de revelação com delay crescente */}
+              <div 
+                className="bg-white p-6 rounded-xl shadow-sm border border-brand-slate/10 hover:shadow-lg hover:border-brand-red/40 transition-all duration-300 group"
+              >
+                <div className="bg-brand-bg w-14 h-14 rounded-lg flex items-center justify-center text-brand-blue mb-6 group-hover:bg-brand-blue group-hover:text-brand-red transition-colors duration-300">
+                  {service.icon}
+                </div>
+                <h3 className="text-lg font-bold text-brand-blue mb-3">{service.title}</h3>
+                <p className="text-brand-slate text-sm leading-relaxed">
+                  {service.desc}
+                </p>
               </div>
-              <h3 className="text-lg font-bold text-brand-blue mb-3">{service.title}</h3>
-              <p className="text-brand-slate text-sm leading-relaxed">
-                {service.desc}
-              </p>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>
@@ -78,10 +84,12 @@ const Services: React.FC = () => {
       {/* Footer Banner */}
       <div className="bg-brand-bg py-16 border-t border-brand-slate/10">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <h3 className="text-xl font-bold text-brand-blue mb-4">Soluções Customizadas</h3>
-          <p className="text-brand-slate max-w-2xl mx-auto">
-            Além das atividades principais, a DevMar está preparada para explorar atividades correlatas e alocar profissionais especialistas diretamente em sua empresa.
-          </p>
+          <ScrollReveal delay={0.1}> {/* Revela o banner no final da página */}
+            <h3 className="text-xl font-bold text-brand-blue mb-4">Soluções Customizadas</h3>
+            <p className="text-brand-slate max-w-2xl mx-auto">
+              Além das atividades principais, a DevMar está preparada para explorar atividades correlatas e alocar profissionais especialistas diretamente em sua empresa.
+            </p>
+          </ScrollReveal>
         </div>
       </div>
     </div>
