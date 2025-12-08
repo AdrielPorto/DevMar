@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowRight, Code2, Users, Rocket, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import Button from '../components/Button';
+import Button from '../components/Button'; // Presumindo que o componente Button existe
 
 const Home: React.FC = () => {
   return (
@@ -33,7 +33,7 @@ const Home: React.FC = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Background Decorative Element */}
         <div className="absolute top-0 right-0 -translate-y-12 translate-x-1/4 opacity-5 hidden lg:block">
           <svg width="600" height="600" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
@@ -42,30 +42,75 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Pillars Section */}
+      {/* Pillars Section (AGORA COM FLIP CARD) */}
       <section className="bg-white py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div className="flex flex-col items-start p-6 rounded-2xl bg-brand-bg border border-brand-slate/10 hover:border-brand-red/30 transition-all duration-300 group">
-              <div className="bg-brand-blue p-3 rounded-lg mb-6 group-hover:bg-brand-red transition-colors duration-300">
-                <Code2 className="h-6 w-6 text-white" />
+            
+            {/* CARD 1: Desenvolvimento Customizado (Flip Card) */}
+            <div className="flip-card-container h-[250px]">
+              <div className="benefit-card">
+                {/* Frente do Cartão: Título e Ícone */}
+                <div className="card-front flex flex-col items-center justify-center p-6 rounded-2xl bg-brand-bg border border-brand-slate/10 group">
+                  <div className="bg-brand-blue p-3 rounded-lg mb-6">
+                    <Code2 className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-display font-bold text-brand-blue mb-3 text-center">
+                    Desenvolvimento Customizado
+                  </h3>
+                </div>
+                
+                {/* Verso do Cartão: Descrição */}
+                <div className="card-back flex flex-col items-center justify-center p-6 rounded-2xl">
+                  <p className="text-white text-center">
+                    Softwares sob medida, Apps nativos e plataformas SaaS criados para as suas necessidades específicas.
+                  </p>
+                </div>
               </div>
-              <h3 className="text-xl font-display font-bold text-brand-blue mb-3">Desenvolvimento Customizado</h3>
-              <p className="text-brand-slate">Softwares sob medida, Apps nativos e plataformas SaaS criados para as suas necessidades específicas.</p>
             </div>
-            <div className="flex flex-col items-start p-6 rounded-2xl bg-brand-bg border border-brand-slate/10 hover:border-brand-red/30 transition-all duration-300 group">
-               <div className="bg-brand-blue p-3 rounded-lg mb-6 group-hover:bg-brand-red transition-colors duration-300">
-                <Users className="h-6 w-6 text-white" />
+
+            {/* CARD 2: Consultoria Especializada (Flip Card) */}
+            <div className="flip-card-container h-[250px]">
+              <div className="benefit-card">
+                {/* Frente do Cartão: Título e Ícone */}
+                <div className="card-front flex flex-col items-center justify-center p-6 rounded-2xl bg-brand-bg border border-brand-slate/10 group">
+                  <div className="bg-brand-blue p-3 rounded-lg mb-6">
+                    <Users className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-display font-bold text-brand-blue mb-3 text-center">
+                    Consultoria Especializada
+                  </h3>
+                </div>
+                
+                {/* Verso do Cartão: Descrição */}
+                <div className="card-back flex flex-col items-center justify-center p-6 rounded-2xl">
+                  <p className="text-white text-center">
+                    Diagnósticos de TI, Governança, Adequação à LGPD e planejamento estratégico tecnológico.
+                  </p>
+                </div>
               </div>
-              <h3 className="text-xl font-display font-bold text-brand-blue mb-3">Consultoria Especializada</h3>
-              <p className="text-brand-slate">Diagnósticos de TI, Governança, Adequação à LGPD e planejamento estratégico tecnológico.</p>
             </div>
-            <div className="flex flex-col items-start p-6 rounded-2xl bg-brand-bg border border-brand-slate/10 hover:border-brand-red/30 transition-all duration-300 group">
-               <div className="bg-brand-blue p-3 rounded-lg mb-6 group-hover:bg-brand-red transition-colors duration-300">
-                <ShieldCheck className="h-6 w-6 text-white" />
+
+            {/* CARD 3: IA e Segurança (Flip Card) */}
+            <div className="flip-card-container h-[250px]">
+              <div className="benefit-card">
+                {/* Frente do Cartão: Título e Ícone */}
+                <div className="card-front flex flex-col items-center justify-center p-6 rounded-2xl bg-brand-bg border border-brand-slate/10 group">
+                  <div className="bg-brand-blue p-3 rounded-lg mb-6">
+                    <ShieldCheck className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-display font-bold text-brand-blue mb-3 text-center">
+                    IA e Segurança
+                  </h3>
+                </div>
+                
+                {/* Verso do Cartão: Descrição */}
+                <div className="card-back flex flex-col items-center justify-center p-6 rounded-2xl">
+                  <p className="text-white text-center">
+                    Soluções avançadas em Inteligência Artificial, Automação e Segurança da Informação (DevSecOps).
+                  </p>
+                </div>
               </div>
-              <h3 className="text-xl font-display font-bold text-brand-blue mb-3">IA e Segurança</h3>
-              <p className="text-brand-slate">Soluções avançadas em Inteligência Artificial, Automação e Segurança da Informação (DevSecOps).</p>
             </div>
           </div>
         </div>
