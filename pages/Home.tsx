@@ -25,14 +25,14 @@ const Home: React.FC = () => {
                 Desenvolvimento de software, consultoria e soluções digitais avançadas. A DevMar conecta profissionais de elite para transformar o seu negócio.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/iniciar-projeto">
-                  <Button className="w-full sm:w-auto">
-                    Iniciar Projeto <ArrowRight className="ml-2 h-4 w-4" />
+                <Link to="/servicos">
+                  <Button variant="primary" className="w-full sm:w-auto">
+                    Ver Serviços <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
-                <Link to="/servicos">
+                <Link to="/iniciar-projeto">
                   <Button variant="outline" className="w-full sm:w-auto">
-                    Ver Serviços
+                    Iniciar Projeto
                   </Button>
                 </Link>
               </div>

@@ -8,7 +8,6 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Início', path: '/' },
   { label: 'Sobre', path: '/sobre' },
   { label: 'Serviços', path: '/servicos' },
-  { label: 'Contato', path: '/contato' },
 ];
 
 const Header: React.FC = () => {
@@ -89,7 +88,7 @@ const Header: React.FC = () => {
             ))}
             <div className="pt-4 pb-2 px-3">
                <Link to="/contato" onClick={() => setIsOpen(false)}>
-                <Button className="w-full justify-center">Fale Conosco</Button>
+                <Button variant="primary" className="w-full justify-center">Fale Conosco</Button>
               </Link>
             </div>
           </div>

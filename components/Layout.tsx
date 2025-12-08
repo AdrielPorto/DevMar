@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import FloatingButton from './FloatingButton';
 import { LayoutProps } from '../types';
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
@@ -12,6 +13,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         {children}
       </main>
       <Footer />
+      <FloatingButton />
     </div>
   );
 };
