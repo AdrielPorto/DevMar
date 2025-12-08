@@ -1,5 +1,5 @@
 import React from 'react';
-import { Code2, Github, Twitter, Linkedin, Mail, Instagram } from 'lucide-react';
+import { Code2, Facebook, Twitter, Linkedin, Mail, Instagram } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-300 hover:text-brand-red transition-colors">
-                <Github className="h-5 w-5" />
+                <Facebook className="h-5 w-5" />
               </a>
               <a href="#" className="text-gray-300 hover:text-brand-red transition-colors">
                 <Linkedin className="h-5 w-5" />
