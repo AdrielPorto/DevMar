@@ -160,7 +160,7 @@ export const enUS = {
     ai: 'Artificial Intelligence',
     cloud: 'Cloud Computing',
     contact: 'Contact',
-    location: 'Maricá, RJ - Brazil',
+    location: 'R. Ver. Luiz Antonio da Cunha, 310 - Maricá - Rio de Janeiro',
     rights: 'All rights reserved.',
     privacy: 'Privacy',
     terms: 'Terms',
