@@ -46,9 +46,9 @@ const About: React.FC = () => {
           <ScrollReveal delay={0.3}>
             <div className="bg-brand-bg rounded-2xl p-8 border border-brand-slate/10">
               <img 
-                src="https://picsum.photos/600/400?grayscale" 
+                src="/images/sobre.jpg" 
                 alt="Equipe DevMar" 
-                className="rounded-lg shadow-lg mb-6 w-full object-cover h-64 grayscale hover:grayscale-0 transition-all duration-500"
+                className="rounded-lg shadow-lg mb-6 w-full object-cover h-64"
               />
               <div className="flex items-center justify-between text-brand-blue font-display font-bold">
                 <span>Fundada em Maricá/RJ</span>
