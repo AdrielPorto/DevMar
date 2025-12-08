@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { NavItem } from '../types';
-import Button from './Button';
 
 const NAV_ITEMS: NavItem[] = [
   { label: 'Início', path: '/' },
   { label: 'Sobre', path: '/sobre' },
   { label: 'Serviços', path: '/servicos' },
+  { label: 'Contato', path: '/contato' },
 ];
 
 const Header: React.FC = () => {
@@ -32,7 +32,7 @@ const Header: React.FC = () => {
               />
             </div>
 
-            <span className="font-display font-bold text-xl text-brand-blue tracking-tight">
+            <span className="font-display font-bold text-2xl sm:text-3xl text-brand-blue tracking-tight">
               DevMar
             </span>
           </Link>
@@ -52,12 +52,6 @@ const Header: React.FC = () => {
                 {item.label}
               </Link>
             ))}
-
-            <Link to="/contato">
-              <Button variant="primary" className="py-2 px-4 text-sm">
-                Fale Conosco
-              </Button>
-            </Link>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -67,7 +61,11 @@ const Header: React.FC = () => {
               className="text-brand-blue hover:text-brand-red focus:outline-none"
               aria-label="Menu"
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isOpen ? (
+                <X className="h-6 w-6 text-brand-red" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </button>
           </div>
         </div>
@@ -91,14 +89,6 @@ const Header: React.FC = () => {
                 {item.label}
               </Link>
             ))}
-
-            <div className="pt-4 pb-2 px-3">
-              <Link to="/contato" onClick={() => setIsOpen(false)}>
-                <Button className="w-full justify-center">
-                  Fale Conosco
-                </Button>
-              </Link>
-            </div>
           </div>
         </div>
       )}
