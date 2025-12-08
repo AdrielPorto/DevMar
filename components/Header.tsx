@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { NavItem } from '../types';
 import Button from './Button';
 
@@ -67,15 +67,7 @@ const Header: React.FC = () => {
               className="text-brand-blue hover:text-brand-red focus:outline-none"
               aria-label="Menu"
             >
-              {isOpen ? (
-                <X className="h-6 w-6 text-brand-red" />
-              ) : (
-                <img
-                  src="/images/menu-icon.png"
-                  alt="Abrir Menu"
-                  className="h-6 w-6 object-contain"
-                />
-              )}
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
