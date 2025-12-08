@@ -53,6 +53,9 @@ const Quote: React.FC = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <ScrollReveal>
+            <h1 className="text-4xl md:text-5xl font-display font-bold text-brand-blue mb-4">
+              Iniciar Projeto
+            </h1>
             <p className="text-brand-slate text-lg max-w-2xl mx-auto">
               Preencha o formulário abaixo para solicitar um orçamento personalizado. 
               Nossa equipe analisará sua necessidade e retornará com uma proposta detalhada.
