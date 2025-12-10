@@ -1,10 +1,9 @@
 import React, { useState, useRef } from 'react';
-import emailjs from '@emailjs/browser';
 import { ArrowRight, FileText, Calendar, DollarSign, Building2, User, Mail, MessageSquare, ChevronDown, Loader2, CheckCircle, XCircle } from 'lucide-react';
 import Button from '../components/Button';
 import ScrollReveal from '../components/ScrollReveal';
 import { useLanguage } from '../contexts/LanguageContext';
-import { EMAILJS_CONFIG } from '../config/emailjs';
+import { sendQuoteEmail } from '../services/emailServiceQuote';
 
 const Quote: React.FC = () => {
   const { t } = useLanguage();
@@ -41,12 +40,7 @@ const Quote: React.FC = () => {
     setSubmitStatus('idle');
 
     try {
-      await emailjs.sendForm(
-        EMAILJS_CONFIG.SERVICE_ID,
-        EMAILJS_CONFIG.TEMPLATE_ID,
-        formRef.current,
-        EMAILJS_CONFIG.PUBLIC_KEY
-      );
+      await sendQuoteEmail(formRef.current);
       
       setSubmitStatus('success');
       setFormState({
