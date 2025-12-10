@@ -1,3 +1,5 @@
+// src/locales/en-US.ts
+
 export const enUS = {
   // Navigation
   nav: {
@@ -7,8 +9,8 @@ export const enUS = {
     contact: 'Contact',
   },
 
-  // Home
-  home: {
+  // Home (Omitido por brevidade)
+  home: { 
     badge: 'Technology Cooperative',
     title: 'Technology and innovation with',
     titleHighlight: 'purpose',
@@ -30,8 +32,8 @@ export const enUS = {
     requestQuote: 'Request Quote',
   },
 
-  // About
-  about: {
+  // About (Omitido por brevidade)
+  about: { 
     title: 'Who We Are',
     subtitle: 'A technology cooperative combining technical excellence with collaborative principles.',
     strengthTitle: 'The strength of DevMar',
@@ -50,8 +52,8 @@ export const enUS = {
     ethicsDesc: 'Transparency in budgets, deadlines and code ownership.',
   },
 
-  // Services
-  services: {
+  // Services (Omitido por brevidade)
+  services: { 
     title: 'Our Services',
     subtitle: 'Complete solutions based on the highest technical standards and in compliance with our social statute.',
     
@@ -83,7 +85,7 @@ export const enUS = {
     customSolutionsDesc: 'Beyond core activities, DevMar is prepared to explore related activities and allocate specialist professionals directly to your company.',
   },
 
-  // Contact
+  // Contact - COM CHAVES DE FEEDBACK
   contact: {
     title: "Let's talk?",
     subtitle: 'Have a project in mind or want to know more about how we work? Get in touch with DevMar.',
@@ -104,10 +106,14 @@ export const enUS = {
     messagePlaceholder: 'Describe your needs...',
     sendButton: 'Send Message',
     successMessage: 'Thank you! The DevMar team will contact you soon.',
+    
+    // CHAVES ADICIONADAS
+    sending: "Sending email...",
+    errorMessage: "Failed to send the message. Please check your data or try again later.",
   },
 
-  // Quote
-  quote: {
+  // Quote (Omitido por brevidade)
+  quote: { 
     title: 'Start Project',
     subtitle: 'Fill out the form below to request a personalized quote. Our team will analyze your needs and respond with a detailed proposal.',
     formTitle: 'Request Quote',
@@ -150,8 +156,8 @@ export const enUS = {
     step3: 'We will send a detailed commercial proposal with scope, deadlines and investment.',
   },
 
-  // Footer
-  footer: {
+  // Footer (Omitido por brevidade)
+  footer: { 
     description: 'Technology cooperative focused on IT services, development and innovation. Transforming ideas into code.',
     navigation: 'Navigation',
     specialties: 'Specialties',
@@ -166,4 +172,3 @@ export const enUS = {
     terms: 'Terms',
   },
 };
-

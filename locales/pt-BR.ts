@@ -1,3 +1,5 @@
+// src/locales/pt-BR.ts
+
 export const ptBR = {
   // Navegação
   nav: {
@@ -7,8 +9,8 @@ export const ptBR = {
     contact: 'Contato',
   },
 
-  // Home
-  home: {
+  // Home (Omitido por brevidade)
+  home: { 
     badge: 'Cooperativa de Tecnologia',
     title: 'Tecnologia e inovação com',
     titleHighlight: 'propósito',
@@ -30,8 +32,8 @@ export const ptBR = {
     requestQuote: 'Solicitar Orçamento',
   },
 
-  // About
-  about: {
+  // About (Omitido por brevidade)
+  about: { 
     title: 'Quem Somos',
     subtitle: 'Uma cooperativa de tecnologia unindo excelência técnica e princípios colaborativos.',
     strengthTitle: 'A força da DevMar',
@@ -50,8 +52,8 @@ export const ptBR = {
     ethicsDesc: 'Transparência nos orçamentos, nos prazos e na propriedade do código.',
   },
 
-  // Services
-  services: {
+  // Services (Omitido por brevidade)
+  services: { 
     title: 'Nossos Serviços',
     subtitle: 'Soluções completas baseadas nos mais altos padrões técnicos e em conformidade com nosso estatuto social.',
     
@@ -83,7 +85,7 @@ export const ptBR = {
     customSolutionsDesc: 'Além das atividades principais, a DevMar está preparada para explorar atividades correlatas e alocar profissionais especialistas diretamente em sua empresa.',
   },
 
-  // Contact
+  // Contact - COM CHAVES DE FEEDBACK
   contact: {
     title: 'Vamos conversar?',
     subtitle: 'Tem um projeto em mente ou quer saber mais sobre como trabalhamos? Entre em contato com a DevMar.',
@@ -104,10 +106,14 @@ export const ptBR = {
     messagePlaceholder: 'Descreva sua necessidade...',
     sendButton: 'Enviar Mensagem',
     successMessage: 'Obrigado! A equipe DevMar entrará em contato em breve.',
+    
+    // CHAVES ADICIONADAS
+    sending: "Enviando e-mail...",
+    errorMessage: "Falha ao enviar a mensagem. Por favor, verifique seus dados ou tente novamente mais tarde.", 
   },
 
-  // Quote
-  quote: {
+  // Quote (Omitido por brevidade)
+  quote: { 
     title: 'Iniciar Projeto',
     subtitle: 'Preencha o formulário abaixo para solicitar um orçamento personalizado. Nossa equipe analisará sua necessidade e retornará com uma proposta detalhada.',
     formTitle: 'Solicitar Orçamento',
@@ -150,8 +156,8 @@ export const ptBR = {
     step3: 'Enviaremos uma proposta comercial detalhada com escopo, prazos e investimento.',
   },
 
-  // Footer
-  footer: {
+  // Footer (Omitido por brevidade)
+  footer: { 
     description: 'Cooperativa de tecnologia focada em serviços de TI, desenvolvimento e inovação. Transformando ideias em código.',
     navigation: 'Navegação',
     specialties: 'Especialidades',
@@ -166,4 +172,3 @@ export const ptBR = {
     terms: 'Termos',
   },
 };
-

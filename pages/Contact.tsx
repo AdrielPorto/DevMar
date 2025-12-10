@@ -1,17 +1,41 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Loader } from 'lucide-react';
+import { sendContactEmail } from '../services/emailServiceContact'; 
 import Button from '../components/Button';
 import ScrollReveal from '../components/ScrollReveal';
 import { useLanguage } from '../contexts/LanguageContext';
 
+interface FormState {
+  name: string;
+  email: string;
+  message: string;
+}
+
 const Contact: React.FC = () => {
   const { t } = useLanguage();
-  const [formState, setFormState] = useState({ name: '', email: '', message: '' });
+  const [formState, setFormState] = useState<FormState>({ name: '', email: '', message: '' });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert(t.contact.successMessage);
-    setFormState({ name: '', email: '', message: '' });
+    setLoading(true);
+    setError(null);
+    setSuccess(false);
+
+    try {
+      await sendContactEmail(formState); 
+      
+      setSuccess(true);
+      setFormState({ name: '', email: '', message: '' });
+
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : t.contact.errorMessage || 'Falha ao enviar a mensagem. Tente novamente mais tarde.';
+      setError(errorMessage);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -19,6 +43,10 @@ const Contact: React.FC = () => {
       ...formState,
       [e.target.id]: e.target.value
     });
+    if (error || success) {
+      setError(null);
+      setSuccess(false);
+    }
   };
 
   return (
@@ -82,6 +110,8 @@ const Contact: React.FC = () => {
             <div className="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-brand-red">
               <h3 className="text-2xl font-display font-bold text-brand-blue mb-6">{t.contact.formTitle}</h3>
               <form onSubmit={handleSubmit} className="space-y-6">
+                
+                {/* Campo Nome */}
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-brand-slate mb-2">{t.contact.nameLabel}</label>
                   <input
@@ -94,6 +124,8 @@ const Contact: React.FC = () => {
                     onChange={handleChange}
                   />
                 </div>
+                
+                {/* Campo Email */}
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-brand-slate mb-2">{t.contact.emailLabel}</label>
                   <input
@@ -106,6 +138,8 @@ const Contact: React.FC = () => {
                     onChange={handleChange}
                   />
                 </div>
+                
+                {/* Campo Mensagem */}
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-brand-slate mb-2">{t.contact.messageLabel}</label>
                   <textarea
@@ -118,12 +152,40 @@ const Contact: React.FC = () => {
                     onChange={handleChange}
                   ></textarea>
                 </div>
-                <Button type="submit" className="w-full justify-center text-lg">
-                  {t.contact.sendButton} <Send className="ml-2 h-4 w-4" />
+                
+                {/* FEEDBACK DE STATUS */}
+                {loading && (
+                  <p className="flex items-center text-brand-blue font-medium p-3 bg-brand-bg rounded-md">
+                    <Loader className="animate-spin mr-2 h-4 w-4" /> {t.contact.sending || 'Enviando...'}
+                  </p>
+                )}
+                {error && (
+                  <p className="text-red-600 font-medium p-3 bg-red-100 rounded-md border border-red-200">
+                    {error}
+                  </p>
+                )}
+                {success && (
+                  <p className="text-green-600 font-medium p-3 bg-green-100 rounded-md border border-green-200">
+                    {t.contact.successMessage || 'Mensagem enviada com sucesso!'}
+                  </p>
+                )}
+
+                {/* BOTÃO DE SUBMISSÃO */}
+                <Button type="submit" className="w-full justify-center text-lg" disabled={loading}>
+                  {loading ? (
+                    <>
+                      <Loader className="animate-spin mr-2 h-4 w-4" />
+                      {t.contact.sending || 'Enviando'}
+                    </>
+                  ) : (
+                    <>
+                      {t.contact.sendButton} <Send className="ml-2 h-4 w-4" />
+                    </>
+                  )}
                 </Button>
               </form>
             </div>
-          </ScrollReveal>                                                    
+          </ScrollReveal>
         </div>
       </div>
     </div>
