@@ -147,8 +147,10 @@ export const enUS = {
     budgetTbd: 'To be defined',
     
     submitButton: 'Request Quote',
+    sendingButton: 'Sending...',
     disclaimer: 'By submitting, you agree to receive a commercial proposal from DevMar. Your data is secure and will only be used for contact regarding this project.',
     successMessage: 'Thank you! We received your quote request. Our team will contact you soon to discuss the details of your project.',
+    errorMessage: 'An error occurred while sending your request. Please try again or contact us via WhatsApp.',
     
     whatHappens: 'What happens next?',
     step1: 'Our team will analyze your request within 24 business hours.',

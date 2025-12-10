@@ -147,8 +147,10 @@ export const ptBR = {
     budgetTbd: 'A definir',
     
     submitButton: 'Solicitar Orçamento',
+    sendingButton: 'Enviando...',
     disclaimer: 'Ao enviar, você concorda em receber uma proposta comercial da DevMar. Seus dados estão seguros e serão usados apenas para contato sobre este projeto.',
     successMessage: 'Obrigado! Recebemos sua solicitação de orçamento. Nossa equipe entrará em contato em breve para discutir os detalhes do seu projeto.',
+    errorMessage: 'Ocorreu um erro ao enviar sua solicitação. Por favor, tente novamente ou entre em contato por WhatsApp.',
     
     whatHappens: 'O que acontece depois?',
     step1: 'Nossa equipe analisará sua solicitação em até 24 horas úteis.',

@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import { ArrowRight, FileText, Calendar, DollarSign, Building2, User, Mail, MessageSquare, ChevronDown } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
+import { ArrowRight, FileText, Calendar, DollarSign, Building2, User, Mail, MessageSquare, ChevronDown, Loader2, CheckCircle, XCircle } from 'lucide-react';
 import Button from '../components/Button';
 import ScrollReveal from '../components/ScrollReveal';
 import { useLanguage } from '../contexts/LanguageContext';
+import { EMAILJS_CONFIG } from '../config/emailjs';
 
 const Quote: React.FC = () => {
   const { t } = useLanguage();
+  const formRef = useRef<HTMLFormElement>(null);
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -15,6 +18,8 @@ const Quote: React.FC = () => {
     deadline: '',
     budget: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const services = [
     t.services.softwareDev,
@@ -27,18 +32,44 @@ const Quote: React.FC = () => {
     t.services.training
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert(t.quote.successMessage);
-    setFormState({
-      name: '',
-      email: '',
-      company: '',
-      service: '',
-      description: '',
-      deadline: '',
-      budget: ''
-    });
+    
+    if (!formRef.current) return;
+    
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      await emailjs.sendForm(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID,
+        formRef.current,
+        EMAILJS_CONFIG.PUBLIC_KEY
+      );
+      
+      setSubmitStatus('success');
+      setFormState({
+        name: '',
+        email: '',
+        company: '',
+        service: '',
+        description: '',
+        deadline: '',
+        budget: ''
+      });
+      
+      // Reset status after 5 seconds
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      setSubmitStatus('error');
+      
+      // Reset status after 5 seconds
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -76,7 +107,7 @@ const Quote: React.FC = () => {
               </h2>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
               {/* Nome e Email */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -87,6 +118,7 @@ const Quote: React.FC = () => {
                   <input
                     type="text"
                     id="name"
+                    name="name"
                     required
                     className="w-full px-4 py-3 rounded-lg bg-brand-bg border border-brand-slate/20 focus:border-brand-red focus:bg-white focus:ring-2 focus:ring-brand-red/20 transition-all text-brand-blue"
                     placeholder={t.quote.namePlaceholder}
@@ -102,6 +134,7 @@ const Quote: React.FC = () => {
                   <input
                     type="email"
                     id="email"
+                    name="email"
                     required
                     className="w-full px-4 py-3 rounded-lg bg-brand-bg border border-brand-slate/20 focus:border-brand-red focus:bg-white focus:ring-2 focus:ring-brand-red/20 transition-all text-brand-blue"
                     placeholder={t.quote.emailPlaceholder}
@@ -121,6 +154,7 @@ const Quote: React.FC = () => {
                   <input
                     type="text"
                     id="company"
+                    name="company"
                     required
                     className="w-full px-4 py-3 rounded-lg bg-brand-bg border border-brand-slate/20 focus:border-brand-red focus:bg-white focus:ring-2 focus:ring-brand-red/20 transition-all text-brand-blue"
                     placeholder={t.quote.companyPlaceholder}
@@ -136,6 +170,7 @@ const Quote: React.FC = () => {
                   <div className="relative">
                     <select
                       id="service"
+                      name="service"
                       required
                       className="w-full px-4 py-3 pr-10 rounded-lg bg-brand-bg border border-brand-slate/20 focus:border-brand-red focus:bg-white focus:ring-2 focus:ring-brand-red/20 transition-all text-brand-blue appearance-none cursor-pointer"
                       value={formState.service}
@@ -161,6 +196,7 @@ const Quote: React.FC = () => {
                 </label>
                 <textarea
                   id="description"
+                  name="description"
                   required
                   rows={5}
                   className="w-full px-4 py-3 rounded-lg bg-brand-bg border border-brand-slate/20 focus:border-brand-red focus:bg-white focus:ring-2 focus:ring-brand-red/20 transition-all text-brand-blue resize-none"
@@ -180,6 +216,7 @@ const Quote: React.FC = () => {
                   <div className="relative">
                     <select
                       id="deadline"
+                      name="deadline"
                       className="w-full px-4 py-3 pr-10 rounded-lg bg-brand-bg border border-brand-slate/20 focus:border-brand-red focus:bg-white focus:ring-2 focus:ring-brand-red/20 transition-all text-brand-blue appearance-none cursor-pointer"
                       value={formState.deadline}
                       onChange={handleChange}
@@ -202,6 +239,7 @@ const Quote: React.FC = () => {
                   <div className="relative">
                     <select
                       id="budget"
+                      name="budget"
                       className="w-full px-4 py-3 pr-10 rounded-lg bg-brand-bg border border-brand-slate/20 focus:border-brand-red focus:bg-white focus:ring-2 focus:ring-brand-red/20 transition-all text-brand-blue appearance-none cursor-pointer"
                       value={formState.budget}
                       onChange={handleChange}
@@ -219,10 +257,39 @@ const Quote: React.FC = () => {
                 </div>
               </div>
 
+              {/* Mensagem de Status */}
+              {submitStatus === 'success' && (
+                <div className="flex items-center gap-3 p-4 rounded-lg bg-green-50 border border-green-200 text-green-800">
+                  <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0" />
+                  <p>{t.quote.successMessage}</p>
+                </div>
+              )}
+              
+              {submitStatus === 'error' && (
+                <div className="flex items-center gap-3 p-4 rounded-lg bg-red-50 border border-red-200 text-red-800">
+                  <XCircle className="h-5 w-5 text-red-600 flex-shrink-0" />
+                  <p>{t.quote.errorMessage}</p>
+                </div>
+              )}
+
               {/* Botão de Envio */}
               <div className="pt-4">
-                <Button type="submit" variant="primary" className="w-full justify-center text-lg py-4">
-                  {t.quote.submitButton} <ArrowRight className="ml-2 h-5 w-5" />
+                <Button 
+                  type="submit" 
+                  variant="primary" 
+                  className="w-full justify-center text-lg py-4"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                      {t.quote.sendingButton}
+                    </>
+                  ) : (
+                    <>
+                      {t.quote.submitButton} <ArrowRight className="ml-2 h-5 w-5" />
+                    </>
+                  )}
                 </Button>
                 <p className="text-sm text-brand-slate text-center mt-4">
                   {t.quote.disclaimer}
