@@ -3,8 +3,12 @@ import { EMAILJS_CONFIG } from '../config/emailjs';
 
 interface QuoteEmailParams {
   name: string;
+  phone: string;
   email: string;
   company: string;
+  cnpj: string;
+  website: string;
+  segment: string;
   service: string;
   description: string;
   deadline: string;

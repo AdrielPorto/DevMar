@@ -119,11 +119,17 @@ export const ptBR = {
     formTitle: 'Solicitar Orçamento',
     
     nameLabel: 'Nome Completo',
-    namePlaceholder: 'Seu nome',
-    emailLabel: 'Email Corporativo',
+    namePlaceholder: 'Seu nome completo',
+    phoneLabel: 'Telefone (WhatsApp)',
+    phonePlaceholder: '+55 (21) 99999-9999',
+    emailLabel: 'Email',
     emailPlaceholder: 'seu@empresa.com',
     companyLabel: 'Empresa / Organização',
     companyPlaceholder: 'Nome da empresa',
+    cnpjLabel: 'CNPJ',
+    cnpjPlaceholder: '00.000.000/0000-00',
+    websiteLabel: 'Site ou Perfil de Rede Social',
+    websitePlaceholder: 'https://www.exemplo.com ou @perfil',
     serviceLabel: 'Tipo de Serviço',
     servicePlaceholder: 'Selecione um serviço',
     descriptionLabel: 'Descreva seu Projeto',
@@ -145,6 +151,8 @@ export const ptBR = {
     budget100kTo500k: 'R$ 100.000 - R$ 500.000',
     budgetAbove500k: 'Acima de R$ 500.000',
     budgetTbd: 'A definir',
+    
+    optional: '(opcional)',
     
     submitButton: 'Solicitar Orçamento',
     sendingButton: 'Enviando...',

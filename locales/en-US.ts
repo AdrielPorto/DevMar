@@ -119,11 +119,17 @@ export const enUS = {
     formTitle: 'Request Quote',
     
     nameLabel: 'Full Name',
-    namePlaceholder: 'Your name',
-    emailLabel: 'Corporate Email',
+    namePlaceholder: 'Your full name',
+    phoneLabel: 'Phone (WhatsApp)',
+    phonePlaceholder: '+55 (21) 99999-9999',
+    emailLabel: 'Email',
     emailPlaceholder: 'your@company.com',
     companyLabel: 'Company / Organization',
     companyPlaceholder: 'Company name',
+    cnpjLabel: 'CNPJ',
+    cnpjPlaceholder: '00.000.000/0000-00',
+    websiteLabel: 'Website or Social Media Profile',
+    websitePlaceholder: 'https://www.example.com or @profile',
     serviceLabel: 'Service Type',
     servicePlaceholder: 'Select a service',
     descriptionLabel: 'Describe your Project',
@@ -145,6 +151,8 @@ export const enUS = {
     budget100kTo500k: '$20,000 - $100,000',
     budgetAbove500k: 'Above $100,000',
     budgetTbd: 'To be defined',
+    
+    optional: '(optional)',
     
     submitButton: 'Request Quote',
     sendingButton: 'Sending...',

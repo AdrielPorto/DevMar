@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { ArrowRight, FileText, Calendar, DollarSign, Building2, User, Mail, MessageSquare, ChevronDown, Loader2, CheckCircle, XCircle } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { ArrowRight, FileText, Calendar, DollarSign, Building2, User, Mail, MessageSquare, ChevronDown, Loader2, CheckCircle, XCircle, Phone, Hash, Globe, Search, Briefcase } from 'lucide-react';
 import Button from '../components/Button';
 import ScrollReveal from '../components/ScrollReveal';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -10,15 +10,23 @@ const Quote: React.FC = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const [formState, setFormState] = useState({
     name: '',
+    phone: '',
     email: '',
     company: '',
+    cnpj: '',
+    website: '',
+    segment: '',
     service: '',
     description: '',
     deadline: '',
     budget: ''
   });
+  const [nameError, setNameError] = useState('');
+  const [segmentError, setSegmentError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [segmentDropdownOpen, setSegmentDropdownOpen] = useState(false);
+  const [segmentSearch, setSegmentSearch] = useState('');
 
   const services = [
     t.services.softwareDev,
@@ -31,10 +39,90 @@ const Quote: React.FC = () => {
     t.services.training
   ];
 
+  const segments = [
+    'Consultoria e Contabilidade',
+    'Comunicação, Marketing e Agências',
+    'Serviços Financeiros (Bancos, Corretoras, Seguros)',
+    'Recursos Humanos e Recrutamento',
+    'Serviços de Engenharia e Arquitetura',
+    'SaaS, TI, Telecom e Internet',
+    'Desenvolvimento de Software e Aplicativos',
+    'E-commerce e Negócios Digitais',
+    'Hardware e Eletrônicos',
+    'Moda, Varejo e Lojas',
+    'Supermercados e Atacados',
+    'Distribuição e Logística',
+    'Comércio de Produtos Específicos (Ex: Automotivo, Pet)',
+    'Serviços Automotivos e Mecânica (Oficinas, Funilaria, Peças)',
+    'Saúde, Clínicas e Médicos',
+    'Estética, Salão de Beleza e Barbearia',
+    'Farmácias e Produtos Farmacêuticos',
+    'Academias e Fitness',
+    'Restaurantes e Lanchonetes',
+    'Bares, Cafeterias e Casas Noturnas',
+    'Hotelaria e Turismo (Hotéis, Pousadas, Agências)',
+    'Indústria de Alimentos e Bebidas',
+    'Indústria de Transformação (Metalurgia, Plástico, etc.)',
+    'Indústria Química e Petroquímica',
+    'Indústria Têxtil e de Confecção',
+    'Energia e Utilities (Água, Gás, Eletricidade)',
+    'Construção Civil, Imobiliário e Infraestrutura',
+    'Materiais de Construção e Decoração',
+    'Educação e Ensino (Escolas, Cursos, Treinamentos)',
+    'Artes, Cultura e Entretenimento',
+    'Esportes, Lazer e Clubes (Inclui Artigos Esportivos e Torcidas)',
+    'Agronegócio e Agropecuária',
+    'Extrativismo e Mineração',
+    'MEI (Microempreendedor Individual)',
+    'Não tenho empresa',
+    'Outros'
+  ];
+
+  const filteredSegments = segments.filter(segment =>
+    segment.toLowerCase().includes(segmentSearch.toLowerCase())
+  );
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (segmentDropdownOpen) {
+        const target = event.target as HTMLElement;
+        if (!target.closest('.segment-dropdown-container')) {
+          setSegmentDropdownOpen(false);
+          setSegmentSearch('');
+        }
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [segmentDropdownOpen]);
+
+  const validateName = (name: string): boolean => {
+    const words = name.trim().split(/\s+/).filter(word => word.length > 0);
+    return words.length > 1;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formRef.current) return;
+    
+    // Validate name has more than 1 word
+    if (!validateName(formState.name)) {
+      setNameError('Por favor, informe seu nome completo (nome e sobrenome)');
+      return;
+    }
+    setNameError('');
+
+    // Validate segment is selected
+    if (!formState.segment || formState.segment.trim() === '') {
+      setSegmentError('Por favor, selecione o segmento da sua empresa');
+      return;
+    }
+    setSegmentError('');
     
     setIsSubmitting(true);
     setSubmitStatus('idle');
@@ -45,13 +133,18 @@ const Quote: React.FC = () => {
       setSubmitStatus('success');
       setFormState({
         name: '',
+        phone: '',
         email: '',
         company: '',
+        cnpj: '',
+        website: '',
+        segment: '',
         service: '',
         description: '',
         deadline: '',
         budget: ''
       });
+      setSegmentSearch('');
       
       // Reset status after 5 seconds
       setTimeout(() => setSubmitStatus('idle'), 5000);
@@ -67,10 +160,84 @@ const Quote: React.FC = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormState({
-      ...formState,
-      [e.target.id]: e.target.value
-    });
+    const value = e.target.value;
+    const fieldId = e.target.id;
+    
+    // Clear name error when user types
+    if (fieldId === 'name') {
+      setNameError('');
+    }
+    
+    // Format phone number
+    if (fieldId === 'phone') {
+      const formatted = formatPhone(value);
+      setFormState(prev => ({
+        ...prev,
+        phone: formatted
+      }));
+    } else {
+      setFormState({
+        ...formState,
+        [fieldId]: value
+      });
+    }
+  };
+
+  const formatPhone = (value: string): string => {
+    // Remove all non-digit characters except +
+    let cleaned = value.replace(/[^\d+]/g, '');
+    
+    // If it starts with +, extract the number part
+    if (cleaned.startsWith('+')) {
+      const digits = cleaned.slice(1).replace(/\D/g, '');
+      if (digits.length === 0) return '+';
+      
+      // If it already has country code 55, format as Brazilian
+      if (digits.startsWith('55')) {
+        const localDigits = digits.slice(2);
+        if (localDigits.length <= 2) {
+          return `+55 (${localDigits}`;
+        } else if (localDigits.length <= 7) {
+          return `+55 (${localDigits.slice(0, 2)}) ${localDigits.slice(2)}`;
+        } else if (localDigits.length <= 10) {
+          return `+55 (${localDigits.slice(0, 2)}) ${localDigits.slice(2, 7)}-${localDigits.slice(7)}`;
+        } else {
+          return `+55 (${localDigits.slice(0, 2)}) ${localDigits.slice(2, 7)}-${localDigits.slice(7, 11)}`;
+        }
+      } else {
+        // Other country codes, just return with +
+        return cleaned;
+      }
+    }
+    
+    // Otherwise, format as Brazilian phone: +55 (XX) XXXXX-XXXX
+    const digits = cleaned.replace(/\D/g, '');
+    if (digits.length === 0) return '';
+    
+    // If it starts with 55, treat as already having country code
+    if (digits.startsWith('55') && digits.length > 2) {
+      const localDigits = digits.slice(2);
+      if (localDigits.length <= 2) {
+        return `+55 (${localDigits}`;
+      } else if (localDigits.length <= 7) {
+        return `+55 (${localDigits.slice(0, 2)}) ${localDigits.slice(2)}`;
+      } else if (localDigits.length <= 10) {
+        return `+55 (${localDigits.slice(0, 2)}) ${localDigits.slice(2, 7)}-${localDigits.slice(7)}`;
+      } else {
+        return `+55 (${localDigits.slice(0, 2)}) ${localDigits.slice(2, 7)}-${localDigits.slice(7, 11)}`;
+      }
+    }
+    
+    // Format as Brazilian phone with auto-add +55
+    if (digits.length <= 2) {
+      return `+55 (${digits}`;
+    } else if (digits.length <= 7) {
+      return `+55 (${digits.slice(0, 2)}) ${digits.slice(2)}`;
+    } else if (digits.length <= 10) {
+      return `+55 (${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+    } else {
+      return `+55 (${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7, 11)}`;
+    }
   };
 
   return (
@@ -102,28 +269,51 @@ const Quote: React.FC = () => {
             </div>
 
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
-              {/* Nome e Email */}
+              {/* Nome Completo */}
+              <div>
+                <label htmlFor="name" className="flex items-center gap-2 text-sm font-medium text-brand-slate mb-2">
+                  <User className="h-4 w-4" />
+                  {t.quote.nameLabel} <span className="text-brand-red">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  className={`w-full px-4 py-3 rounded-lg bg-brand-bg border ${
+                    nameError ? 'border-red-500' : 'border-brand-slate/20'
+                  } focus:border-brand-red focus:bg-white focus:ring-2 focus:ring-brand-red/20 transition-all text-brand-blue`}
+                  placeholder={t.quote.namePlaceholder}
+                  value={formState.name}
+                  onChange={handleChange}
+                />
+                {nameError && (
+                  <p className="text-red-500 text-sm mt-1">{nameError}</p>
+                )}
+              </div>
+
+              {/* Telefone e Email */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="name" className="flex items-center gap-2 text-sm font-medium text-brand-slate mb-2">
-                    <User className="h-4 w-4" />
-                    {t.quote.nameLabel}
+                  <label htmlFor="phone" className="flex items-center gap-2 text-sm font-medium text-brand-slate mb-2">
+                    <Phone className="h-4 w-4" />
+                    {t.quote.phoneLabel} <span className="text-brand-red">*</span>
                   </label>
                   <input
-                    type="text"
-                    id="name"
-                    name="name"
+                    type="tel"
+                    id="phone"
+                    name="phone"
                     required
                     className="w-full px-4 py-3 rounded-lg bg-brand-bg border border-brand-slate/20 focus:border-brand-red focus:bg-white focus:ring-2 focus:ring-brand-red/20 transition-all text-brand-blue"
-                    placeholder={t.quote.namePlaceholder}
-                    value={formState.name}
+                    placeholder={t.quote.phonePlaceholder}
+                    value={formState.phone}
                     onChange={handleChange}
                   />
                 </div>
                 <div>
                   <label htmlFor="email" className="flex items-center gap-2 text-sm font-medium text-brand-slate mb-2">
                     <Mail className="h-4 w-4" />
-                    {t.quote.emailLabel}
+                    {t.quote.emailLabel} <span className="text-brand-red">*</span>
                   </label>
                   <input
                     type="email"
@@ -138,12 +328,12 @@ const Quote: React.FC = () => {
                 </div>
               </div>
 
-              {/* Empresa e Tipo de Serviço */}
+              {/* Empresa, CNPJ e Website */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="company" className="flex items-center gap-2 text-sm font-medium text-brand-slate mb-2">
                     <Building2 className="h-4 w-4" />
-                    {t.quote.companyLabel}
+                    {t.quote.companyLabel} <span className="text-brand-red">*</span>
                   </label>
                   <input
                     type="text"
@@ -157,28 +347,153 @@ const Quote: React.FC = () => {
                   />
                 </div>
                 <div>
-                  <label htmlFor="service" className="flex items-center gap-2 text-sm font-medium text-brand-slate mb-2">
-                    <FileText className="h-4 w-4" />
-                    {t.quote.serviceLabel}
+                  <label htmlFor="cnpj" className="flex items-center gap-2 text-sm font-medium text-brand-slate mb-2">
+                    <Hash className="h-4 w-4" />
+                    {t.quote.cnpjLabel} <span className="text-gray-500 opacity-60 text-xs font-normal">{t.quote.optional}</span>
                   </label>
-                  <div className="relative">
-                    <select
-                      id="service"
-                      name="service"
-                      required
-                      className="w-full px-4 py-3 pr-10 rounded-lg bg-brand-bg border border-brand-slate/20 focus:border-brand-red focus:bg-white focus:ring-2 focus:ring-brand-red/20 transition-all text-brand-blue appearance-none cursor-pointer"
-                      value={formState.service}
-                      onChange={handleChange}
-                    >
-                      <option value="">{t.quote.servicePlaceholder}</option>
-                      {services.map((service, index) => (
-                        <option key={index} value={service}>
-                          {service}
-                        </option>
-                      ))}
-                    </select>
-                    <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-brand-slate pointer-events-none" />
+                  <input
+                    type="text"
+                    id="cnpj"
+                    name="cnpj"
+                    className="w-full px-4 py-3 rounded-lg bg-brand-bg border border-brand-slate/20 focus:border-brand-red focus:bg-white focus:ring-2 focus:ring-brand-red/20 transition-all text-brand-blue"
+                    placeholder={t.quote.cnpjPlaceholder}
+                    value={formState.cnpj}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+
+              {/* Website/Social Media */}
+              <div>
+                <label htmlFor="website" className="flex items-center gap-2 text-sm font-medium text-brand-slate mb-2">
+                  <Globe className="h-4 w-4" />
+                  {t.quote.websiteLabel} <span className="text-gray-500 opacity-60 text-xs font-normal">{t.quote.optional}</span>
+                </label>
+                <input
+                  type="text"
+                  id="website"
+                  name="website"
+                  className="w-full px-4 py-3 rounded-lg bg-brand-bg border border-brand-slate/20 focus:border-brand-red focus:bg-white focus:ring-2 focus:ring-brand-red/20 transition-all text-brand-blue"
+                  placeholder={t.quote.websitePlaceholder}
+                  value={formState.website}
+                  onChange={handleChange}
+                />
+              </div>
+
+              {/* Segmento da Empresa */}
+              <div>
+                <label className="flex items-center gap-2 text-sm font-medium text-brand-slate mb-2">
+                  <Briefcase className="h-4 w-4" />
+                  Qual o segmento da sua empresa? <span className="text-brand-red">*</span>
+                </label>
+                <div className="relative segment-dropdown-container">
+                  <div
+                    className={`w-full px-4 py-3 rounded-lg bg-brand-bg border ${
+                      segmentError ? 'border-red-500' : 'border-brand-slate/20'
+                    } focus-within:border-brand-red focus-within:bg-white focus-within:ring-2 focus-within:ring-brand-red/20 transition-all cursor-pointer`}
+                    onClick={() => {
+                      setSegmentDropdownOpen(!segmentDropdownOpen);
+                      if (segmentError) setSegmentError('');
+                    }}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className={formState.segment ? 'text-brand-blue' : 'text-brand-slate'}>
+                        {formState.segment || 'Selecione ou busque o segmento'}
+                      </span>
+                      <ChevronDown className={`h-5 w-5 text-brand-slate transition-transform ${segmentDropdownOpen ? 'transform rotate-180' : ''}`} />
+                    </div>
                   </div>
+                  
+                  {segmentDropdownOpen && (
+                    <>
+                      <div 
+                        className="fixed inset-0 z-10" 
+                        onClick={() => {
+                          setSegmentDropdownOpen(false);
+                          setSegmentSearch('');
+                        }}
+                      />
+                      <div className="absolute z-20 w-full mt-1 bg-white rounded-lg shadow-lg border border-brand-slate/20 max-h-80 overflow-hidden">
+                        <div className="p-2 border-b border-brand-slate/20">
+                          <div className="relative">
+                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-brand-slate" />
+                            <input
+                              type="text"
+                              placeholder="Buscar segmento..."
+                              className="w-full pl-10 pr-4 py-2 rounded-lg bg-brand-bg border border-brand-slate/20 focus:border-brand-red focus:ring-2 focus:ring-brand-red/20 text-brand-blue text-sm"
+                              value={segmentSearch}
+                              onChange={(e) => {
+                                e.stopPropagation();
+                                setSegmentSearch(e.target.value);
+                              }}
+                              onClick={(e) => e.stopPropagation()}
+                              autoFocus
+                            />
+                          </div>
+                        </div>
+                        <div className="max-h-64 overflow-y-auto">
+                          {filteredSegments.length > 0 ? (
+                            filteredSegments.map((segment, index) => (
+                              <button
+                                key={index}
+                                type="button"
+                                className="w-full px-4 py-2 text-left text-sm text-brand-blue hover:bg-brand-bg transition-colors"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setFormState({ ...formState, segment });
+                                  setSegmentDropdownOpen(false);
+                                  setSegmentSearch('');
+                                  if (segmentError) setSegmentError('');
+                                }}
+                              >
+                                {segment}
+                              </button>
+                            ))
+                          ) : (
+                            <div className="px-4 py-2 text-sm text-brand-slate text-center">
+                              Nenhum segmento encontrado
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </>
+                  )}
+                  
+                  {/* Hidden input for form submission */}
+                  <input
+                    type="hidden"
+                    name="segment"
+                    value={formState.segment}
+                  />
+                </div>
+                {segmentError && (
+                  <p className="text-red-500 text-sm mt-1">{segmentError}</p>
+                )}
+              </div>
+
+              {/* Tipo de Serviço */}
+              <div>
+                <label htmlFor="service" className="flex items-center gap-2 text-sm font-medium text-brand-slate mb-2">
+                  <FileText className="h-4 w-4" />
+                  {t.quote.serviceLabel} <span className="text-brand-red">*</span>
+                </label>
+                <div className="relative">
+                  <select
+                    id="service"
+                    name="service"
+                    required
+                    className="w-full px-4 py-3 pr-10 rounded-lg bg-brand-bg border border-brand-slate/20 focus:border-brand-red focus:bg-white focus:ring-2 focus:ring-brand-red/20 transition-all text-brand-blue appearance-none cursor-pointer"
+                    value={formState.service}
+                    onChange={handleChange}
+                  >
+                    <option value="">{t.quote.servicePlaceholder}</option>
+                    {services.map((service, index) => (
+                      <option key={index} value={service}>
+                        {service}
+                      </option>
+                    ))}
+                  </select>
+                  <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-brand-slate pointer-events-none" />
                 </div>
               </div>
 
@@ -186,7 +501,7 @@ const Quote: React.FC = () => {
               <div>
                 <label htmlFor="description" className="flex items-center gap-2 text-sm font-medium text-brand-slate mb-2">
                   <MessageSquare className="h-4 w-4" />
-                  {t.quote.descriptionLabel}
+                  {t.quote.descriptionLabel} <span className="text-brand-red">*</span>
                 </label>
                 <textarea
                   id="description"
@@ -205,7 +520,7 @@ const Quote: React.FC = () => {
                 <div>
                   <label htmlFor="deadline" className="flex items-center gap-2 text-sm font-medium text-brand-slate mb-2">
                     <Calendar className="h-4 w-4" />
-                    {t.quote.deadlineLabel}
+                    {t.quote.deadlineLabel} <span className="text-gray-500 opacity-60 text-xs font-normal">{t.quote.optional}</span>
                   </label>
                   <div className="relative">
                     <select
@@ -228,7 +543,7 @@ const Quote: React.FC = () => {
                 <div>
                   <label htmlFor="budget" className="flex items-center gap-2 text-sm font-medium text-brand-slate mb-2">
                     <DollarSign className="h-4 w-4" />
-                    {t.quote.budgetLabel}
+                    {t.quote.budgetLabel} <span className="text-gray-500 opacity-60 text-xs font-normal">{t.quote.optional}</span>
                   </label>
                   <div className="relative">
                     <select
