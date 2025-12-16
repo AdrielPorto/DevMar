@@ -54,14 +54,22 @@
       }
 
       /* Dark mode overrides for common Tailwind utility colors used in the project */
-      .dark .bg-brand-bg { background-color: #0b1220 !important; }
-      .dark .bg-white { background-color: #0f172a !important; }
-      .dark .text-brand-blue { color: #e5e7eb !important; }
-      .dark .text-brand-slate { color: #94a3b8 !important; }
-      .dark .border-brand-slate\/10 { border-color: rgba(148, 163, 184, 0.2) !important; }
-      .dark .border-brand-slate\/20 { border-color: rgba(148, 163, 184, 0.25) !important; }
-      .dark .bg-brand-light\/95 { background-color: rgba(15, 23, 42, 0.95) !important; }
+      .dark .bg-brand-bg { background-color: #0b1220; }
+      .dark .bg-white { background-color: #0f172a; }
+      .dark .text-brand-blue { color: #e5e7eb; }
+      .dark .text-brand-slate { color: #94a3b8; }
+      .dark .border-brand-slate\/10 { border-color: rgba(148, 163, 184, 0.2); }
+      .dark .border-brand-slate\/20 { border-color: rgba(148, 163, 184, 0.25); }
+      .dark .bg-brand-light\/95 { background-color: rgba(15, 23, 42, 0.95); }
       .dark .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.35), 0 4px 6px -4px rgba(0,0,0,0.35) !important; }
+
+      /* Ensure Tailwind focus:bg-white doesn't turn inputs truly white in dark mode */
+      .dark .focus\:bg-white:focus {
+        background-color: #0f172a !important;
+      }
+      .dark .focus-within\:bg-white:focus-within {
+        background-color: #0f172a !important;
+      }
       
       /* Custom styles for react-phone-input-2 */
       .phone-input-container {
@@ -89,7 +97,8 @@
       }
 
       .dark .phone-input-container:focus-within {
-        border-color: #E31B23;
+        /* keep focus consistent with other fields in dark mode */
+        border-color: rgba(229, 231, 235, 0.25);
         background-color: #0f172a;
         box-shadow: 0 0 0 2px rgba(227, 27, 35, 0.25);
       }
@@ -242,6 +251,37 @@
       textarea::placeholder {
         color: #9CA3AF;
         opacity: 1;
+      }
+
+      /* Fix browser autofill background in dark mode (Chrome/Safari) */
+      .dark input:-webkit-autofill,
+      .dark input:-webkit-autofill:hover,
+      .dark input:-webkit-autofill:focus,
+      .dark input:-webkit-autofill:active,
+      .dark textarea:-webkit-autofill,
+      .dark textarea:-webkit-autofill:hover,
+      .dark textarea:-webkit-autofill:focus,
+      .dark textarea:-webkit-autofill:active,
+      .dark select:-webkit-autofill,
+      .dark select:-webkit-autofill:hover,
+      .dark select:-webkit-autofill:focus,
+      .dark select:-webkit-autofill:active {
+        -webkit-text-fill-color: #e5e7eb !important;
+        caret-color: #e5e7eb !important;
+        background-color: #0b1220 !important;
+        box-shadow: 0 0 0px 1000px #0b1220 inset !important;
+        -webkit-box-shadow: 0 0 0px 1000px #0b1220 inset !important;
+        transition: background-color 9999s ease-in-out 0s;
+      }
+
+      /* Fix browser autofill background in dark mode (Firefox) */
+      .dark input:-moz-autofill,
+      .dark textarea:-moz-autofill,
+      .dark select:-moz-autofill {
+        color: #e5e7eb !important;
+        caret-color: #e5e7eb !important;
+        background-color: #0b1220 !important;
+        box-shadow: 0 0 0px 1000px #0b1220 inset !important;
       }
     </style>
 
