@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ArrowRight, FileText, Calendar, DollarSign, Building2, User, Mail, MessageSquare, ChevronDown, Loader2, CheckCircle, XCircle, Phone, Hash, Globe, Search, Briefcase } from 'lucide-react';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 import Button from '../components/Button';
 import ScrollReveal from '../components/ScrollReveal';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -168,76 +170,17 @@ const Quote: React.FC = () => {
       setNameError('');
     }
     
-    // Format phone number
-    if (fieldId === 'phone') {
-      const formatted = formatPhone(value);
-      setFormState(prev => ({
-        ...prev,
-        phone: formatted
-      }));
-    } else {
-      setFormState({
-        ...formState,
-        [fieldId]: value
-      });
-    }
+    setFormState({
+      ...formState,
+      [fieldId]: value
+    });
   };
 
-  const formatPhone = (value: string): string => {
-    // Remove all non-digit characters except +
-    let cleaned = value.replace(/[^\d+]/g, '');
-    
-    // If it starts with +, extract the number part
-    if (cleaned.startsWith('+')) {
-      const digits = cleaned.slice(1).replace(/\D/g, '');
-      if (digits.length === 0) return '+';
-      
-      // If it already has country code 55, format as Brazilian
-      if (digits.startsWith('55')) {
-        const localDigits = digits.slice(2);
-        if (localDigits.length <= 2) {
-          return `+55 (${localDigits}`;
-        } else if (localDigits.length <= 7) {
-          return `+55 (${localDigits.slice(0, 2)}) ${localDigits.slice(2)}`;
-        } else if (localDigits.length <= 10) {
-          return `+55 (${localDigits.slice(0, 2)}) ${localDigits.slice(2, 7)}-${localDigits.slice(7)}`;
-        } else {
-          return `+55 (${localDigits.slice(0, 2)}) ${localDigits.slice(2, 7)}-${localDigits.slice(7, 11)}`;
-        }
-      } else {
-        // Other country codes, just return with +
-        return cleaned;
-      }
-    }
-    
-    // Otherwise, format as Brazilian phone: +55 (XX) XXXXX-XXXX
-    const digits = cleaned.replace(/\D/g, '');
-    if (digits.length === 0) return '';
-    
-    // If it starts with 55, treat as already having country code
-    if (digits.startsWith('55') && digits.length > 2) {
-      const localDigits = digits.slice(2);
-      if (localDigits.length <= 2) {
-        return `+55 (${localDigits}`;
-      } else if (localDigits.length <= 7) {
-        return `+55 (${localDigits.slice(0, 2)}) ${localDigits.slice(2)}`;
-      } else if (localDigits.length <= 10) {
-        return `+55 (${localDigits.slice(0, 2)}) ${localDigits.slice(2, 7)}-${localDigits.slice(7)}`;
-      } else {
-        return `+55 (${localDigits.slice(0, 2)}) ${localDigits.slice(2, 7)}-${localDigits.slice(7, 11)}`;
-      }
-    }
-    
-    // Format as Brazilian phone with auto-add +55
-    if (digits.length <= 2) {
-      return `+55 (${digits}`;
-    } else if (digits.length <= 7) {
-      return `+55 (${digits.slice(0, 2)}) ${digits.slice(2)}`;
-    } else if (digits.length <= 10) {
-      return `+55 (${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
-    } else {
-      return `+55 (${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7, 11)}`;
-    }
+  const handlePhoneChange = (value: string) => {
+    setFormState(prev => ({
+      ...prev,
+      phone: value
+    }));
   };
 
   return (
@@ -299,15 +242,20 @@ const Quote: React.FC = () => {
                     <Phone className="h-4 w-4" />
                     {t.quote.phoneLabel} <span className="text-brand-red">*</span>
                   </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    required
-                    className="w-full px-4 py-3 rounded-lg bg-brand-bg border border-brand-slate/20 focus:border-brand-red focus:bg-white focus:ring-2 focus:ring-brand-red/20 transition-all text-brand-blue"
-                    placeholder={t.quote.phonePlaceholder}
+                  <PhoneInput
+                    country={'br'}
                     value={formState.phone}
-                    onChange={handleChange}
+                    onChange={handlePhoneChange}
+                    placeholder=""
+                    inputProps={{
+                      id: 'phone',
+                      name: 'phone',
+                      required: true
+                    }}
+                    containerClass="phone-input-container"
+                    inputClass="w-full text-brand-blue"
+                    buttonClass="phone-input-button"
+                    dropdownClass="phone-input-dropdown"
                   />
                 </div>
                 <div>
@@ -384,7 +332,7 @@ const Quote: React.FC = () => {
               <div>
                 <label className="flex items-center gap-2 text-sm font-medium text-brand-slate mb-2">
                   <Briefcase className="h-4 w-4" />
-                  Qual o segmento da sua empresa? <span className="text-brand-red">*</span>
+                  {t.quote.segmentLabel} <span className="text-brand-red">*</span>
                 </label>
                 <div className="relative segment-dropdown-container">
                   <div
@@ -398,7 +346,7 @@ const Quote: React.FC = () => {
                   >
                     <div className="flex items-center justify-between">
                       <span className={formState.segment ? 'text-brand-blue' : 'text-brand-slate'}>
-                        {formState.segment || 'Selecione ou busque o segmento'}
+                        {formState.segment || t.quote.segmentPlaceholder}
                       </span>
                       <ChevronDown className={`h-5 w-5 text-brand-slate transition-transform ${segmentDropdownOpen ? 'transform rotate-180' : ''}`} />
                     </div>
@@ -419,7 +367,7 @@ const Quote: React.FC = () => {
                             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-brand-slate" />
                             <input
                               type="text"
-                              placeholder="Buscar segmento..."
+                              placeholder={t.quote.segmentSearchPlaceholder}
                               className="w-full pl-10 pr-4 py-2 rounded-lg bg-brand-bg border border-brand-slate/20 focus:border-brand-red focus:ring-2 focus:ring-brand-red/20 text-brand-blue text-sm"
                               value={segmentSearch}
                               onChange={(e) => {
@@ -451,7 +399,7 @@ const Quote: React.FC = () => {
                             ))
                           ) : (
                             <div className="px-4 py-2 text-sm text-brand-slate text-center">
-                              Nenhum segmento encontrado
+                              {t.quote.segmentNotFound}
                             </div>
                           )}
                         </div>
@@ -482,7 +430,9 @@ const Quote: React.FC = () => {
                     id="service"
                     name="service"
                     required
-                    className="w-full px-4 py-3 pr-10 rounded-lg bg-brand-bg border border-brand-slate/20 focus:border-brand-red focus:bg-white focus:ring-2 focus:ring-brand-red/20 transition-all text-brand-blue appearance-none cursor-pointer"
+                    className={`w-full px-4 py-3 pr-10 rounded-lg bg-brand-bg border border-brand-slate/20 focus:border-brand-red focus:bg-white focus:ring-2 focus:ring-brand-red/20 transition-all appearance-none cursor-pointer ${
+                      formState.service ? 'text-brand-blue' : 'text-gray-400'
+                    }`}
                     value={formState.service}
                     onChange={handleChange}
                   >
@@ -526,16 +476,18 @@ const Quote: React.FC = () => {
                     <select
                       id="deadline"
                       name="deadline"
-                      className="w-full px-4 py-3 pr-10 rounded-lg bg-brand-bg border border-brand-slate/20 focus:border-brand-red focus:bg-white focus:ring-2 focus:ring-brand-red/20 transition-all text-brand-blue appearance-none cursor-pointer"
+                      className={`w-full px-4 py-3 pr-10 rounded-lg bg-brand-bg border border-brand-slate/20 focus:border-brand-red focus:bg-white focus:ring-2 focus:ring-brand-red/20 transition-all appearance-none cursor-pointer ${
+                        formState.deadline ? 'text-brand-blue' : 'text-gray-400'
+                      }`}
                       value={formState.deadline}
                       onChange={handleChange}
                     >
                       <option value="">{t.quote.deadlinePlaceholder}</option>
                       <option value="urgente">{t.quote.deadlineUrgent}</option>
-                      <option value="curto">{t.quote.deadlineShort}</option>
-                      <option value="medio">{t.quote.deadlineMedium}</option>
-                      <option value="longo">{t.quote.deadlineLong}</option>
-                      <option value="flexivel">{t.quote.deadlineFlexible}</option>
+                      <option value="curto-prazo">{t.quote.deadlineShort}</option>
+                      <option value="medio-prazo">{t.quote.deadlineMedium}</option>
+                      <option value="longo-prazo">{t.quote.deadlineLong}</option>
+                      <option value="nao-definido">{t.quote.deadlineFlexible}</option>
                     </select>
                     <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-brand-slate pointer-events-none" />
                   </div>
@@ -549,7 +501,9 @@ const Quote: React.FC = () => {
                     <select
                       id="budget"
                       name="budget"
-                      className="w-full px-4 py-3 pr-10 rounded-lg bg-brand-bg border border-brand-slate/20 focus:border-brand-red focus:bg-white focus:ring-2 focus:ring-brand-red/20 transition-all text-brand-blue appearance-none cursor-pointer"
+                      className={`w-full px-4 py-3 pr-10 rounded-lg bg-brand-bg border border-brand-slate/20 focus:border-brand-red focus:bg-white focus:ring-2 focus:ring-brand-red/20 transition-all appearance-none cursor-pointer ${
+                        formState.budget ? 'text-brand-blue' : 'text-gray-400'
+                      }`}
                       value={formState.budget}
                       onChange={handleChange}
                     >

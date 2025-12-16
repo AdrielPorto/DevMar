@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Globe } from 'lucide-react';
+import { Menu, X, Globe, Sun, Moon } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useTheme } from '../contexts/ThemeContext';
 import { languages, Language } from '../locales';
 
 const Header: React.FC = () => {
@@ -9,6 +10,7 @@ const Header: React.FC = () => {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const location = useLocation();
   const { language, setLanguage, t } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
 
   const NAV_ITEMS = [
     { label: t.nav.home, path: '/' },
@@ -63,39 +65,52 @@ const Header: React.FC = () => {
               </Link>
             ))}
 
-            {/* Language Selector - Desktop */}
-            <div className="relative">
+            {/* Theme + Language - Desktop */}
+            <div className="flex items-center gap-2">
               <button
-                onClick={() => setLangMenuOpen(!langMenuOpen)}
+                onClick={toggleTheme}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-brand-slate hover:text-brand-blue hover:bg-brand-bg transition-colors"
-                aria-label="Select language"
+                aria-label="Alternar tema (claro/escuro)"
+                title="Alternar tema"
+                type="button"
               >
-                <Globe className="h-4 w-4" />
-                <span className="hidden lg:inline">{currentLang?.flag}</span>
+                {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
               </button>
 
-              {langMenuOpen && (
-                <>
-                  <div 
-                    className="fixed inset-0 z-40" 
-                    onClick={() => setLangMenuOpen(false)}
-                  />
-                  <div className="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-brand-slate/10 py-1 z-50">
-                    {languages.map((lang) => (
-                      <button
-                        key={lang.code}
-                        onClick={() => handleLanguageChange(lang.code)}
-                        className={`w-full px-4 py-2 text-left text-sm flex items-center gap-2 hover:bg-brand-bg transition-colors ${
-                          language === lang.code ? 'text-brand-red font-medium' : 'text-brand-slate'
-                        }`}
-                      >
-                        <span>{lang.flag}</span>
-                        <span>{lang.label}</span>
-                      </button>
-                    ))}
-                  </div>
-                </>
-              )}
+              {/* Language Selector - Desktop */}
+              <div className="relative">
+                <button
+                  onClick={() => setLangMenuOpen(!langMenuOpen)}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-brand-slate hover:text-brand-blue hover:bg-brand-bg transition-colors"
+                  aria-label="Select language"
+                >
+                  <Globe className="h-4 w-4" />
+                  <span className="hidden lg:inline">{currentLang?.flag}</span>
+                </button>
+
+                {langMenuOpen && (
+                  <>
+                    <div 
+                      className="fixed inset-0 z-40" 
+                      onClick={() => setLangMenuOpen(false)}
+                    />
+                    <div className="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-brand-slate/10 py-1 z-50">
+                      {languages.map((lang) => (
+                        <button
+                          key={lang.code}
+                          onClick={() => handleLanguageChange(lang.code)}
+                          className={`w-full px-4 py-2 text-left text-sm flex items-center gap-2 hover:bg-brand-bg transition-colors ${
+                            language === lang.code ? 'text-brand-red font-medium' : 'text-brand-slate'
+                          }`}
+                        >
+                          <span>{lang.flag}</span>
+                          <span>{lang.label}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
           </nav>
 
@@ -134,6 +149,17 @@ const Header: React.FC = () => {
                 </>
               )}
             </div>
+
+            {/* Theme Toggle - Mobile (next to language) */}
+            <button
+              onClick={toggleTheme}
+              className="flex items-center gap-1 px-2 py-1.5 rounded-lg text-sm text-brand-slate hover:text-brand-blue transition-colors"
+              aria-label="Alternar tema (claro/escuro)"
+              title="Alternar tema"
+              type="button"
+            >
+              {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            </button>
 
             <button
               onClick={toggleMenu}

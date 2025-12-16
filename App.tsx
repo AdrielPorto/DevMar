@@ -1,6 +1,7 @@
 import React from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from './contexts/LanguageContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 import Layout from './components/Layout';
 import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
@@ -13,20 +14,22 @@ import "./styles/FlipCard.css";
 
 const App: React.FC = () => {
   return (
-    <LanguageProvider>
-      <Router>
-        <ScrollToTop />
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/sobre" element={<About />} />
-            <Route path="/servicos" element={<Services />} />
-            <Route path="/contato" element={<Contact />} />
-            <Route path="/iniciar-projeto" element={<Quote />} />
-          </Routes>
-        </Layout>
-      </Router>
-    </LanguageProvider>
+    <ThemeProvider>
+      <LanguageProvider>
+        <Router>
+          <ScrollToTop />
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/sobre" element={<About />} />
+              <Route path="/servicos" element={<Services />} />
+              <Route path="/contato" element={<Contact />} />
+              <Route path="/iniciar-projeto" element={<Quote />} />
+            </Routes>
+          </Layout>
+        </Router>
+      </LanguageProvider>
+    </ThemeProvider>
   );
 };
 

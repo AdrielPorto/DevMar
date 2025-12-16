@@ -18,6 +18,7 @@
     <!-- Tailwind Configuration -->
     <script>
       tailwind.config = {
+        darkMode: 'class',
         theme: {
           extend: {
             fontFamily: {
@@ -45,7 +46,217 @@
         background-color: #F8FAFC;
         color: #6C7579;
       }
+
+      /* Dark mode base */
+      .dark body {
+        background-color: #0b1220;
+        color: #94a3b8;
+      }
+
+      /* Dark mode overrides for common Tailwind utility colors used in the project */
+      .dark .bg-brand-bg { background-color: #0b1220 !important; }
+      .dark .bg-white { background-color: #0f172a !important; }
+      .dark .text-brand-blue { color: #e5e7eb !important; }
+      .dark .text-brand-slate { color: #94a3b8 !important; }
+      .dark .border-brand-slate\/10 { border-color: rgba(148, 163, 184, 0.2) !important; }
+      .dark .border-brand-slate\/20 { border-color: rgba(148, 163, 184, 0.25) !important; }
+      .dark .bg-brand-light\/95 { background-color: rgba(15, 23, 42, 0.95) !important; }
+      .dark .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.35), 0 4px 6px -4px rgba(0,0,0,0.35) !important; }
+      
+      /* Custom styles for react-phone-input-2 */
+      .phone-input-container {
+        width: 100%;
+        position: relative;
+        border: 1px solid rgba(108, 117, 121, 0.2);
+        border-radius: 0.5rem;
+        background-color: #f2f4f7;
+        transition: all 0.2s;
+        overflow: visible;
+        min-height: 48px;
+      }
+
+      /* Dark mode - react-phone-input-2 */
+      .dark .phone-input-container {
+        /* match bg-brand-bg in dark */
+        background-color: #0b1220;
+        border-color: rgba(148, 163, 184, 0.25);
+      }
+      
+      .phone-input-container:focus-within {
+        border-color: #E31B23;
+        background-color: white;
+        box-shadow: 0 0 0 2px rgba(227, 27, 35, 0.2);
+      }
+
+      .dark .phone-input-container:focus-within {
+        border-color: #E31B23;
+        background-color: #0f172a;
+        box-shadow: 0 0 0 2px rgba(227, 27, 35, 0.25);
+      }
+      
+      .phone-input-container .phone-input-button {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        background-color: transparent;
+        border: none;
+        border-right: 1px solid rgba(108, 117, 121, 0.2);
+        border-radius: 0.5rem 0 0 0.5rem;
+        padding: 0.75rem 0.5rem;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 60px;
+        max-width: 60px;
+        flex-shrink: 0;
+        box-sizing: border-box;
+      }
+
+      .dark .phone-input-container .phone-input-button {
+        border-right-color: rgba(148, 163, 184, 0.25);
+      }
+
+      /* react-phone-input-2 internal elements (flag area) */
+      .phone-input-container .flag-dropdown,
+      .phone-input-container .selected-flag {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+
+      .phone-input-container .selected-flag:hover,
+      .phone-input-container .flag-dropdown.open,
+      .phone-input-container .flag-dropdown:hover {
+        background: rgba(0, 0, 0, 0.02) !important;
+      }
+
+      .dark .phone-input-container .flag-dropdown,
+      .dark .phone-input-container .selected-flag {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+
+      .dark .phone-input-container .selected-flag:hover,
+      .dark .phone-input-container .flag-dropdown.open,
+      .dark .phone-input-container .flag-dropdown:hover {
+        background: rgba(148, 163, 184, 0.12) !important;
+      }
+
+      /* arrow color in dark */
+      .dark .phone-input-container .selected-flag .arrow {
+        border-top-color: #e5e7eb !important;
+      }
+
+      .dark .phone-input-container .selected-flag .arrow.up {
+        border-bottom-color: #e5e7eb !important;
+      }
+      
+      .phone-input-container:focus-within .phone-input-button {
+        border-right-color: rgba(108, 117, 121, 0.2);
+      }
+      
+      .phone-input-container .phone-input-button:hover {
+        background-color: rgba(0, 0, 0, 0.02);
+      }
+      
+      .phone-input-container input {
+        border: none !important;
+        padding: 0.75rem !important;
+        padding-left: calc(60px + 0.75rem) !important;
+        border-radius: 0.5rem !important;
+        background-color: transparent !important;
+        min-width: 0;
+        width: 100%;
+        height: 48px !important;
+        line-height: 24px !important;
+        font-size: 16px !important;
+        box-sizing: border-box;
+      }
+
+      .dark .phone-input-container input {
+        color: #e5e7eb !important;
+      }
+      
+      .phone-input-container input:focus {
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+      }
+      
+      .phone-input-dropdown {
+        border: 1px solid rgba(108, 117, 121, 0.2);
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        max-height: 300px;
+        overflow-y: auto;
+        /* ensure dropdown opens below and stays above other inputs */
+        top: calc(100% + 6px) !important;
+        left: 0 !important;
+        z-index: 9999 !important;
+      }
+
+      .dark .phone-input-dropdown {
+        background-color: #0f172a;
+        border-color: rgba(148, 163, 184, 0.25);
+        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.35), 0 4px 6px -4px rgba(0,0,0,0.35);
+      }
+      
+      .phone-input-dropdown .country-list {
+        background-color: white;
+      }
+
+      .dark .phone-input-dropdown .country-list {
+        background-color: #0f172a;
+      }
+      
+      .phone-input-dropdown .country-list .country {
+        padding: 0.5rem 1rem;
+        color: #1B2A41;
+      }
+
+      .dark .phone-input-dropdown .country-list .country {
+        color: #e5e7eb;
+      }
+      
+      .phone-input-dropdown .country-list .country:hover {
+        background-color: #f2f4f7;
+      }
+
+      .dark .phone-input-dropdown .country-list .country:hover {
+        background-color: rgba(148, 163, 184, 0.12);
+      }
+      
+      .phone-input-dropdown .country-list .country.highlight {
+        background-color: #f2f4f7;
+      }
+
+      .dark .phone-input-dropdown .country-list .country.highlight {
+        background-color: rgba(148, 163, 184, 0.12);
+      }
+      
+      /* Fix placeholder color consistency */
+      input::placeholder,
+      textarea::placeholder {
+        color: #9CA3AF;
+        opacity: 1;
+      }
     </style>
+
+    <script>
+      // Apply theme ASAP to avoid flash
+      (function () {
+        try {
+          var saved = localStorage.getItem('devmar-theme');
+          var theme = (saved === 'light' || saved === 'dark')
+            ? saved
+            : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          if (theme === 'dark') document.documentElement.classList.add('dark');
+        } catch (e) {}
+      })();
+    </script>
   <script type="importmap">
 {
   "imports": {
