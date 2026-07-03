@@ -10,21 +10,23 @@ const Footer: React.FC = () => {
     <footer className="bg-brand-blue text-white pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-          
+
           {/* Brand Column */}
           <div className="col-span-1 md:col-span-1">
-            <div className="flex items-center space-x-0 mb-4">
-              <div className="p-2 rounded-lg transition-colors duration-300">
+            <Link to="/" className="flex items-center group mb-4 select-none">
+              <div className="flex justify-center items-center py-2 pl-2 pr-0 rounded-lg transition-colors duration-300 flex-shrink-0">
                 <img
                   src="/images/menu-icon.png"
-                  alt="Logo DevMar"
-                  className="h-10 w-10 object-contain"
+                  alt="Logo Devmar"
+                  className="h-[52px] w-[52px] object-contain"
                 />
               </div>
-              <span className="font-display font-bold text-xl text-white tracking-tight">
-                DevMar
-              </span>
-            </div>
+              <div className="flex items-center pl-1">
+                <span className="font-manrope font-semibold text-lg text-white tracking-tight">
+                  DevMar
+                </span>
+              </div>
+            </Link>
             <p className="text-gray-300 text-sm leading-relaxed mb-6">
               {t.footer.description}
             </p>
