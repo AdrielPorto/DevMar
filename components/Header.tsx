@@ -40,15 +40,15 @@ const Header: React.FC = () => {
               <img
                 src="/images/menu-icon.png"
                 alt="Logo Devmar"
-                className="h-[52px] w-auto object-contain"
+                className="h-11 sm:h-[52px] w-auto object-contain"
               />
             </div>
 
-            <div className="flex flex-col justify-center items-start pl-2.5">
-              <span className="font-manrope font-bold text-xl sm:text-[22px] text-[#1a1a1a] dark:text-white tracking-tight leading-[1.1]">
+            <div className="flex flex-col justify-center items-start pl-1.5 sm:pl-2.5">
+              <span className="font-manrope font-bold text-lg sm:text-[22px] text-[#1a1a1a] dark:text-white tracking-tight leading-[1.1]">
                 DevMar
               </span>
-              <span className="font-manrope font-light text-[8px] sm:text-[10px] text-[#1a1a1a] dark:text-gray-300 tracking-wide -mt-[1.5px] leading-none">
+              <span className="font-manrope font-light text-[7px] sm:text-[10px] text-[#1a1a1a] dark:text-gray-300 tracking-wide -mt-[1px] sm:-mt-[1.5px] leading-none">
                 {t.home.badge}
               </span>
             </div>
@@ -118,15 +118,15 @@ const Header: React.FC = () => {
           </nav>
 
           {/* Mobile: Language + Theme + Menu Button */}
-          <div className="md:hidden flex items-center gap-4">
+          <div className="md:hidden flex items-center gap-1.5">
             {/* Language Selector - Mobile */}
             <div className="relative">
               <button
                 onClick={() => setLangMenuOpen(!langMenuOpen)}
-                className="flex items-center gap-1 px-4 py-2.5 rounded-lg text-lg text-brand-slate hover:text-brand-blue transition-colors"
+                className="flex items-center gap-1 px-1.5 py-1 rounded-lg text-sm text-brand-slate hover:text-brand-blue transition-colors"
                 aria-label="Select language"
               >
-                <span className="text-2xl">{currentLang?.flag}</span>
+                <span className="text-xl">{currentLang?.flag}</span>
               </button>
 
               {langMenuOpen && (
@@ -143,7 +143,7 @@ const Header: React.FC = () => {
                         className={`w-full px-4 py-2 text-left text-sm flex items-center gap-2 hover:bg-brand-bg transition-colors ${language === lang.code ? 'text-brand-red font-medium' : 'text-brand-slate'
                           }`}
                       >
-                        <span className="text-xl">{lang.flag}</span>
+                        <span className="text-lg">{lang.flag}</span>
                         <span>{lang.label}</span>
                       </button>
                     ))}
@@ -155,12 +155,12 @@ const Header: React.FC = () => {
             {/* Theme Toggle - Mobile */}
             <button
               onClick={toggleTheme}
-              className="flex items-center gap-1 px-4 py-2.5 rounded-lg text-sm text-brand-slate hover:text-brand-blue transition-colors"
+              className="flex items-center gap-1 px-1.5 py-1 rounded-lg text-sm text-brand-slate hover:text-brand-blue transition-colors"
               aria-label="Alternar tema (claro/escuro)"
               title="Alternar tema"
               type="button"
             >
-              {theme === 'dark' ? <Sun className="h-7 w-7" /> : <Moon className="h-7 w-7" />}
+              {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </button>
 
             <button
