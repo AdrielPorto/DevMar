@@ -7,7 +7,7 @@ import { LayoutProps } from '../types';
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
-  const isQuotePage = location.pathname === '/iniciar-projeto';
+  const isQuotePage = location.pathname === '/iniciar-projeto' || location.pathname === '/quero-ser-cooperado';
 
   return (
     <div className="min-h-screen flex flex-col font-sans bg-brand-bg">

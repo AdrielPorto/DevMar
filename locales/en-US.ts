@@ -170,6 +170,13 @@ export const enUS = {
     step3: 'We will send a detailed commercial proposal with scope, deadlines and investment.',
   },
 
+  // Cooperado
+  cooperado: {
+    title: 'I want to be a Cooperator',
+    subtitle: 'Join DevMar and be part of an innovative technology cooperative. Share your knowledge and grow with us.',
+    formTitle: 'Cooperator Application',
+  },
+
   // Footer (Omitido por brevidade)
   footer: { 
     description: 'Technology cooperative focused on IT services, development and innovation. Transforming ideas into code.',

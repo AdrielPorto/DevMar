@@ -170,6 +170,13 @@ export const ptBR = {
     step3: 'Enviaremos uma proposta comercial detalhada com escopo, prazos e investimento.',
   },
 
+  // Cooperado
+  cooperado: {
+    title: 'Quero ser Cooperado',
+    subtitle: 'Junte-se à DevMar e faça parte de uma cooperativa de tecnologia inovadora. Compartilhe seus conhecimentos e cresça com a gente.',
+    formTitle: 'Inscrição para Cooperado',
+  },
+
   // Footer (Omitido por brevidade)
   footer: {
     description: 'Cooperativa de tecnologia focada em serviços de TI, desenvolvimento e inovação. Transformando ideias em código.',

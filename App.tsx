@@ -9,8 +9,8 @@ import About from './pages/About';
 import Services from './pages/Services';
 import Contact from './pages/Contact';
 import Quote from './pages/Quote';
+import Cooperado from './pages/Cooperado';
 import "./styles/FlipCard.css";
-import { cadastrarCandidato } from "./services/candidatosService";
 
 
 const App: React.FC = () => {
@@ -27,6 +27,7 @@ const App: React.FC = () => {
               <Route path="/servicos" element={<Services />} />
               <Route path="/contato" element={<Contact />} />
               <Route path="/iniciar-projeto" element={<Quote />} />
+              <Route path="/quero-ser-cooperado" element={<Cooperado />} />
             </Routes>
           </Layout>
         </Router>
