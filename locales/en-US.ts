@@ -7,6 +7,7 @@ export const enUS = {
     about: 'About',
     services: 'Services',
     contact: 'Contact',
+    joinUs: 'Join Us',
   },
 
   // Home (Omitido por brevidade)
@@ -171,11 +172,169 @@ export const enUS = {
   },
 
   // Cooperado
-  cooperado: {
-    title: 'I want to be a Cooperator',
-    subtitle: 'Join DevMar and be part of an innovative technology cooperative. Share your knowledge and grow with us.',
-    formTitle: 'Cooperator Application',
-  },
+    cooperado: {
+      title: 'I want to be a Cooperator',
+      subtitle: 'Join DevMar and be part of an innovative technology cooperative. Share your knowledge and grow with us.',
+      formTitle: 'Cooperator Application',
+
+      // Steps
+      stepIndicator: 'Step {current} of {total}',
+      stepPersonal: 'Personal Data',
+      stepWork: 'Area of Work',
+      stepTechnical: 'Technical Profile',
+      btnNext: 'Next',
+      btnConfirm: 'Confirm and Submit',
+      btnSending: 'Sending...',
+
+      // Step 1 - Personal Data
+      nameLabel: 'Full Name',
+      namePlaceholder: 'Your full name',
+      emailLabel: 'Email',
+      emailPlaceholder: 'your@email.com',
+      whatsappLabel: 'WhatsApp',
+      whatsappPlaceholder: '',
+      estadoLabel: 'State',
+      estadoPlaceholder: 'Select a state',
+      cidadeLabel: 'City',
+      cidadePlaceholder: 'Select a city',
+      generoLabel: 'Gender',
+      generoPlaceholder: 'Select',
+      generoOutroLabel: 'Specify your gender',
+      faixaEtariaLabel: 'Age Range',
+      faixaEtariaPlaceholder: 'Select',
+
+      // Step 2 - Area of Work
+      areaTecnologiaLabel: 'Which area of technology interests you the most?',
+      areaTecnologiaPlaceholder: 'Select an area',
+      metodologiasLabel: 'Have you worked with agile methodologies?',
+      metodologiasPlaceholder: 'Select',
+      situacaoLabel: 'Current Professional Situation',
+      situacaoPlaceholder: 'Select',
+      situacaoOutroLabel: 'Specify your situation',
+      formacaoLabel: 'Academic Background',
+      formacaoPlaceholder: 'Select',
+      outrasFormacoesLabel: 'Other Formations',
+      outrasFormacoesPlaceholder: 'Do you have any other formation you would like to highlight?',
+      senioridadeLabel: 'Seniority Level',
+      senioridadePlaceholder: 'Select',
+
+      // Step 3 - Technical Profile
+      stackLabel: 'Main Tech Stack',
+      stackPlaceholder: 'List the 3 main languages, frameworks or tools you master.',
+      idiomasLabel: 'Language Proficiency',
+      idiomasPlaceholder: 'Select',
+      inglesLabel: 'English',
+      espanholLabel: 'Spanish',
+      linkedinLabel: 'LinkedIn',
+      linkedinPlaceholder: 'https://linkedin.com/in/yourprofile',
+      githubLabel: 'GitHub / GitLab',
+      githubPlaceholder: 'https://github.com/youruser',
+      portfolioLabel: 'Portfolio / Website',
+      portfolioPlaceholder: 'https://yourportfolio.com',
+      mensagemLabel: 'Message / Notes',
+      mensagemPlaceholder: 'Tell us something about yourself...',
+
+      // Options - Gender
+      generoMasculino: 'Male',
+      generoFeminino: 'Female',
+      generoNaoBinario: 'Non-binary',
+      generoPrefiroNaoDizer: 'Prefer not to say',
+      generoOutro: 'Other',
+
+      // Options - Age Range
+      faixaEtaria18a24: '18 to 24 years',
+      faixaEtaria25a34: '25 to 34 years',
+      faixaEtaria35a44: '35 to 44 years',
+      faixaEtaria45a54: '45 to 54 years',
+      faixaEtaria55mais: '55 years or older',
+
+      // Options - Area of Technology
+      areaTecWeb: 'Web Development',
+      areaBackend: 'Back-end',
+      areaFrontend: 'Front-end',
+      areaMobile: 'Mobile',
+      areaDados: 'Data',
+      areaIA: 'AI',
+      areaDevOps: 'DevOps',
+      areaSeguranca: 'Security',
+      areaCloud: 'Cloud',
+      areaInfra: 'Infrastructure',
+      areaGames: 'Games',
+
+      // Options - Methodologies
+      metScrum: 'Scrum',
+      metKanban: 'Kanban',
+      metAmbos: 'Both',
+      metNenhum: 'None',
+
+      // Options - Professional Situation
+      sitCLT: 'Employed (CLT)',
+      sitPJ: 'Working as PJ / Freelancer',
+      sitDesempregado: 'Unemployed (looking for opportunities)',
+      sitEstudante: 'Student (no current employment)',
+      sitServidor: 'Civil Servant',
+      sitOutro: 'Other',
+
+      // Options - Academic Background
+      formSupCompleto: 'Completed Higher Education in Technology (Bachelor’s, Licentiate or Technologist)',
+      formSupCursando: 'Higher Education in Technology (in progress)',
+      formTecCompleto: 'Completed Technical Course in Technology',
+      formTecCursando: 'Technical Course in Technology (in progress)',
+      formTransicao: 'Completed Higher Education in other areas (career transition to IT)',
+      formAutodidata: 'Self-taught student / Free courses and Bootcamps (no formal academic background)',
+
+      // Options - Seniority Level
+      senTrainee: 'Trainee',
+      senJunior: 'Junior',
+      senPleno: 'Mid-level',
+      senSenior: 'Senior',
+      senEspecialista: 'Specialist',
+
+      // Options - Language Proficiency
+      nivelBasico: 'Basic',
+      nivelIntermediario: 'Intermediate',
+      nivelAvancado: 'Advanced',
+
+      // Success screen / Termo de Ciência
+      successTitle: 'Next Steps and Acknowledgment',
+      nextStepsTitle: 'Next Steps',
+      nextStepsDesc: 'Thank you for applying! Your profile has been received and will be added to our talent pool. Here is what happens next:',
+      step1: 'Profile review by the DevMar talent team.',
+      step2: 'If there is an aligned project, we will contact you for the next stage.',
+      step3: 'If no immediate vacancy, your profile stays in the pool for future opportunities.',
+      studyTitle: 'Meanwhile, study the fundamentals of cooperativism:',
+      studyDesc: 'Knowing these concepts helps a lot in the next stages:',
+      course1: 'Fundamentals of Cooperativism',
+      course2: 'Cooperativism - First Lessons',
+      studyTip: 'Studying these concepts will help a lot if you are called for the next stages!',
+      termTitle: 'Acknowledgment Term',
+      termText1: 'I understand that this form is an initial screening to compose the cooperative\'s talent pool, with no expectation of call or guarantee of entry.',
+      termText2: 'I am aware that DEVMAR will contact me exclusively if projects aligned with my technical profile arise, with no obligation to send a response or feedback if my profile is not activated.',
+      termAcceptLabel: 'I accept and understand the terms above',
+      termAcceptDesc: 'By checking this box, you confirm that you have read, understood, and accepted the acknowledgment terms presented.',
+      btnBack: 'Back',
+      errorTitle: 'Error submitting form',
+      errorDesc: '',
+
+      // Validation error messages
+      errorNomeCompleto: 'Please provide your full name',
+      errorEmail: 'Email is required',
+      errorWhatsapp: 'WhatsApp is required',
+      errorEstado: 'State is required',
+      errorCidade: 'City is required',
+      errorGenero: 'Gender is required',
+      errorGeneroOutro: 'Please specify gender',
+      errorFaixaEtaria: 'Age range is required',
+      errorAreaTecnologia: 'Area of technology is required',
+      errorMetodologias: 'Please select an option',
+      errorSituacao: 'Professional situation is required',
+      errorSituacaoOutro: 'Please specify your situation',
+      errorFormacao: 'Academic background is required',
+      errorSenioridade: 'Seniority level is required',
+      errorStack: 'Main tech stack is required',
+      errorIngles: 'English proficiency is required',
+      errorEspanhol: 'Spanish proficiency is required',
+    },
 
   // Footer (Omitido por brevidade)
   footer: { 

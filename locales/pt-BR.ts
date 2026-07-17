@@ -7,6 +7,7 @@ export const ptBR = {
     about: 'Sobre',
     services: 'Serviços',
     contact: 'Contato',
+    joinUs: 'Faça Parte',
   },
 
   // Home (Omitido por brevidade)
@@ -171,13 +172,171 @@ export const ptBR = {
   },
 
   // Cooperado
-  cooperado: {
-    title: 'Quero ser Cooperado',
-    subtitle: 'Junte-se à DevMar e faça parte de uma cooperativa de tecnologia inovadora. Compartilhe seus conhecimentos e cresça com a gente.',
-    formTitle: 'Inscrição para Cooperado',
-  },
+    cooperado: {
+      title: 'Quero ser Cooperado',
+      subtitle: 'Junte-se à DevMar e faça parte de uma cooperativa de tecnologia inovadora. Compartilhe seus conhecimentos e cresça com a gente.',
+      formTitle: 'Inscrição para Cooperado',
 
-  // Footer (Omitido por brevidade)
+      // Etapas
+      stepIndicator: 'Etapa {current} de {total}',
+      stepPersonal: 'Dados Pessoais',
+      stepWork: 'Área de Atuação',
+      stepTechnical: 'Perfil Técnico',
+      btnNext: 'Próximo',
+      btnConfirm: 'Confirmar e Enviar',
+      btnSending: 'Enviando...',
+
+      // Etapa 1 - Dados Pessoais
+      nameLabel: 'Nome Completo',
+      namePlaceholder: 'Seu nome completo',
+      emailLabel: 'Email',
+      emailPlaceholder: 'seu@email.com',
+      whatsappLabel: 'WhatsApp',
+      whatsappPlaceholder: '',
+      estadoLabel: 'Estado',
+      estadoPlaceholder: 'Selecione um estado',
+      cidadeLabel: 'Cidade',
+      cidadePlaceholder: 'Selecione uma cidade',
+      generoLabel: 'Gênero',
+      generoPlaceholder: 'Selecione',
+      generoOutroLabel: 'Especifique seu gênero',
+      faixaEtariaLabel: 'Faixa Etária',
+      faixaEtariaPlaceholder: 'Selecione',
+
+      // Etapa 2 - Área de Atuação
+      areaTecnologiaLabel: 'Área da tecnologia que mais te interessa',
+      areaTecnologiaPlaceholder: 'Selecione uma área',
+      metodologiasLabel: 'Você já trabalhou com metodologias ágeis?',
+      metodologiasPlaceholder: 'Selecione',
+      situacaoLabel: 'Situação Profissional Atual',
+      situacaoPlaceholder: 'Selecione',
+      situacaoOutroLabel: 'Especifique sua situação',
+      formacaoLabel: 'Formação Acadêmica',
+      formacaoPlaceholder: 'Selecione',
+      outrasFormacoesLabel: 'Outras Formações',
+      outrasFormacoesPlaceholder: 'Possui alguma outra formação que gostaria de destacar?',
+      senioridadeLabel: 'Nível de Senioridade',
+      senioridadePlaceholder: 'Selecione',
+
+      // Etapa 3 - Perfil Técnico
+      stackLabel: 'Stack Tecnológica Principal',
+      stackPlaceholder: 'Cite as 3 principais linguagens, frameworks ou ferramentas que dominam.',
+      idiomasLabel: 'Nível de Idiomas',
+      idiomasPlaceholder: 'Selecione',
+      inglesLabel: 'Inglês',
+      espanholLabel: 'Espanhol',
+      linkedinLabel: 'LinkedIn',
+      linkedinPlaceholder: 'https://linkedin.com/in/seuperfil',
+      githubLabel: 'GitHub / GitLab',
+      githubPlaceholder: 'https://github.com/seuusuario',
+      portfolioLabel: 'Portfólio / Site',
+      portfolioPlaceholder: 'https://seuportifolio.com',
+      mensagemLabel: 'Mensagem / Observações',
+      mensagemPlaceholder: 'Conte algo sobre você...',
+
+      // Opções - Gênero
+      generoMasculino: 'Masculino',
+      generoFeminino: 'Feminino',
+      generoNaoBinario: 'Não-binário',
+      generoPrefiroNaoDizer: 'Prefiro não dizer',
+      generoOutro: 'Outro',
+
+      // Opções - Faixa Etária
+      faixaEtaria18a24: '18 a 24 anos',
+      faixaEtaria25a34: '25 a 34 anos',
+      faixaEtaria35a44: '35 a 44 anos',
+      faixaEtaria45a54: '45 a 54 anos',
+      faixaEtaria55mais: '55 anos ou mais',
+
+      // Opções - Área da tecnologia
+      areaTecWeb: 'Desenvolvimento Web',
+      areaBackend: 'Back-end',
+      areaFrontend: 'Front-end',
+      areaMobile: 'Mobile',
+      areaDados: 'Dados',
+      areaIA: 'IA',
+      areaDevOps: 'DevOps',
+      areaSeguranca: 'Segurança',
+      areaCloud: 'Cloud',
+      areaInfra: 'Infraestrutura',
+      areaGames: 'Games',
+
+      // Opções - Metodologias
+      metScrum: 'Scrum',
+      metKanban: 'Kanban',
+      metAmbos: 'Ambos',
+      metNenhum: 'Nenhum',
+
+      // Opções - Situação Profissional
+      sitCLT: 'Empregado (CLT)',
+      sitPJ: 'Atuando como PJ / Freelancer',
+      sitDesempregado: 'Desempregado (em busca de oportunidades)',
+      sitEstudante: 'Estudante (sem vínculo empregatício atual)',
+      sitServidor: 'Servidor Público',
+      sitOutro: 'Outro',
+
+      // Opções - Formação Acadêmica
+      formSupCompleto: 'Ensino Superior Completo na área de Tecnologia (Bacharelado, Licenciatura ou Tecnólogo)',
+      formSupCursando: 'Ensino Superior Cursando na área de Tecnologia',
+      formTecCompleto: 'Curso Técnico Completo na área de Tecnologia',
+      formTecCursando: 'Curso Técnico Cursando na área de Tecnologia',
+      formTransicao: 'Formação Superior Completa em outras áreas (em transição de carreira para TI)',
+      formAutodidata: 'Estudante autodidata / Cursos livres e Bootcamps (sem formação acadêmica formal)',
+
+      // Opções - Nível de Senioridade
+      senTrainee: 'Trainee',
+      senJunior: 'Júnior',
+      senPleno: 'Pleno',
+      senSenior: 'Sênior',
+      senEspecialista: 'Especialista',
+
+      // Opções - Nível de Idiomas
+      nivelBasico: 'Básico',
+      nivelIntermediario: 'Intermediário',
+      nivelAvancado: 'Avançado',
+
+      // Tela de sucesso / Termo de Ciência
+      successTitle: 'Próximos Passos e Termo de Ciência',
+      nextStepsTitle: 'Próximos Passos',
+      nextStepsDesc: 'Obrigado por se inscrever! Seu perfil foi recebido e entrará para nosso banco de talentos. Veja o que acontece agora:',
+      step1: 'Análise do perfil pela equipe de talentos da DevMar.',
+      step2: 'Se houver projeto alinhado, entraremos em contato para a próxima etapa.',
+      step3: 'Se não houver vaga imediata, seu perfil fica no banco para futuras oportunidades.',
+      studyTitle: 'Enquanto isso, estude os fundamentos do cooperativismo:',
+      studyDesc: 'Conhecer esses conceitos ajuda muito nas próximas etapas:',
+      course1: 'Fundamentos do Cooperativismo',
+      course2: 'Cooperativismo - Primeiras Lições',
+      studyTip: 'Estudar esses conceitos ajudará muito caso você seja chamado para as próximas etapas!',
+      termTitle: 'Termo de Ciência',
+      termText1: 'Compreendo que este formulário é uma triagem inicial para compor o banco de talentos da cooperativa, não havendo qualquer previsão de chamamento ou garantia de entrada.',
+      termText2: 'Estou ciente de que a DEVMAR entrará em contato exclusivamente caso surjam projetos alinhados ao meu perfil técnico, não havendo obrigatoriedade de envio de resposta ou feedback caso meu perfil não seja acionado.',
+      termAcceptLabel: 'Eu aceito e compreendo os termos acima',
+      termAcceptDesc: 'Ao marcar esta caixa, você confirma que leu, compreendeu e aceita os termos de ciência apresentados.',
+      btnBack: 'Voltar',
+      errorTitle: 'Erro ao enviar formulário',
+      errorDesc: '',
+
+      // Mensagens de erro de validação
+      errorNomeCompleto: 'Por favor, informe seu nome completo',
+      errorEmail: 'Email é obrigatório',
+      errorWhatsapp: 'WhatsApp é obrigatório',
+      errorEstado: 'Estado é obrigatório',
+      errorCidade: 'Cidade é obrigatória',
+      errorGenero: 'Gênero é obrigatório',
+      errorGeneroOutro: 'Por favor, especifique seu gênero',
+      errorFaixaEtaria: 'Faixa etária é obrigatória',
+      errorAreaTecnologia: 'Área da tecnologia é obrigatória',
+      errorMetodologias: 'Selecione uma opção',
+      errorSituacao: 'Situação profissional é obrigatória',
+      errorSituacaoOutro: 'Por favor, especifique sua situação',
+      errorFormacao: 'Formação acadêmica é obrigatória',
+      errorSenioridade: 'Nível de senioridade é obrigatório',
+      errorStack: 'Stack principal é obrigatória',
+      errorIngles: 'Nível de inglês é obrigatório',
+      errorEspanhol: 'Nível de espanhol é obrigatório',
+    },
+
+    // Footer (Omitido por brevidade)
   footer: {
     description: 'Cooperativa de tecnologia focada em serviços de TI, desenvolvimento e inovação. Transformando ideias em código.',
     navigation: 'Navegação',
