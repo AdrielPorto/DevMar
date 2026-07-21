@@ -94,7 +94,6 @@ const Cooperado: React.FC = () => {
     carregarCidades();
   }, [formState.estado]);
 
-  // ================= CONFIGURAÇÃO DE OPÇÕES PARA OS SELECTS =================
 
   const getSelectClassNames = (error?: string) => ({
     control: (state: any) => `w-full px-4 py-2.5 rounded-lg bg-brand-bg border transition-all cursor-pointer text-brand-blue ${
@@ -218,7 +217,121 @@ const Cooperado: React.FC = () => {
     { value: 'Nativo', key: 'nivelNativo' },
   ].map(opt => ({ value: opt.value, label: t.cooperado[opt.key] }));
 
-  // ============================================================================
+  const techStackCategories = {
+    'Linguagens de Programação': [
+      'JavaScript', 'TypeScript', 'Python', 'Java', 'C#', 'C++', 'C', 'Go', 'Rust',
+      'Ruby', 'PHP', 'Swift', 'Kotlin', 'R', 'Dart', 'SQL', 'Bash/Shell', 'Perl',
+      'Scala', 'Haskell', 'Elixir', 'Clojure', 'Lua', 'Objective-C', 'Assembly',
+      'Julia', 'Zig', 'F#', 'Groovy', 'VB.NET', 'MATLAB', 'COBOL', 'Fortran'
+    ],
+    'Frontend & Frameworks': [
+      'React', 'Angular', 'Vue.js', 'Svelte', 'Next.js', 'Nuxt.js', 'Gatsby',
+      'Astro', 'Remix', 'Solid.js', 'Alpine.js', 'jQuery', 'HTML5', 'CSS3',
+      'Tailwind CSS', 'Bootstrap', 'Bulma', 'Sass', 'Less', 'Material UI',
+      'Chakra UI', 'Ant Design', 'Styled Components', 'Redux', 'Zustand',
+      'Webpack', 'Vite', 'Rollup', 'Babel', 'Storybook'
+    ],
+    'Mobile & Desktop': [
+      'React Native', 'Flutter', 'Ionic', 'Xamarin', '.NET MAUI', 'SwiftUI',
+      'Jetpack Compose', 'NativeScript', 'Expo', 'Electron', 'Tauri'
+    ],
+    'Backend & APIs': [
+      'Node.js', 'Express', 'NestJS', 'Fastify', 'Koa', 'Hapi', 'Django',
+      'Flask', 'FastAPI', 'Spring Boot', 'Spring', '.NET', 'ASP.NET Core',
+      'Laravel', 'Symfony', 'Ruby on Rails', 'Phoenix', 'AdonisJS', 'Gin',
+      'Actix', 'Ktor', 'GraphQL', 'REST APIs', 'gRPC', 'tRPC', 'WebSockets', 'SOAP'
+    ],
+    'Bancos de Dados': [
+      'PostgreSQL', 'MySQL', 'MariaDB', 'Oracle', 'SQL Server', 'SQLite',
+      'MongoDB', 'Redis', 'Elasticsearch', 'Cassandra', 'DynamoDB', 'Neo4j',
+      'InfluxDB', 'TimescaleDB', 'CockroachDB', 'ClickHouse', 'RavenDB',
+      'CouchDB', 'Memcached', 'PlanetScale'
+    ],
+    'ORMs & BaaS': [
+      'Prisma', 'TypeORM', 'Sequelize', 'Django ORM', 'Hibernate',
+      'SQLAlchemy', 'Firebase', 'Supabase', 'AWS Amplify', 'Parse', 'Strapi',
+      'Sanity', 'Appwrite'
+    ],
+    'Data Science, Big Data & IA': [
+      'Pandas', 'NumPy', 'Scikit-learn', 'TensorFlow', 'Keras', 'PyTorch',
+      'JAX', 'Apache Spark', 'Hadoop', 'Apache Kafka', 'Apache Airflow',
+      'Tableau', 'Power BI', 'Databricks', 'Snowflake', 'BigQuery', 'Redshift',
+      'Jupyter', 'OpenCV', 'Hugging Face', 'LangChain', 'MLflow', 'spaCy',
+      'Ray', 'dbt', 'RabbitMQ', 'Celery'
+    ],
+    'DevOps, Cloud & Infra': [
+      'Docker', 'Kubernetes', 'Helm', 'AWS', 'Microsoft Azure',
+      'Google Cloud (GCP)', 'IBM Cloud', 'Oracle Cloud', 'DigitalOcean',
+      'Heroku', 'Vercel', 'Netlify', 'Cloudflare', 'Render', 'Railway',
+      'Git', 'GitHub Actions', 'GitLab CI/CD', 'Jenkins', 'CircleCI',
+      'Terraform', 'Pulumi', 'Ansible', 'Chef', 'Puppet', 'Vagrant',
+      'Linux', 'Unix', 'Windows Server', 'Nginx', 'Apache', 'Traefik', 'Istio'
+    ],
+    'Monitoramento & Observabilidade': [
+      'Prometheus', 'Grafana', 'Datadog', 'New Relic', 'Sentry', 'Logstash',
+      'Kibana', 'Splunk', 'OpenTelemetry', 'ELK', 'Zabbix', 'Nagios'
+    ],
+    'Testes & QA': [
+      'Jest', 'Vitest', 'Cypress', 'Selenium', 'Puppeteer', 'Playwright',
+      'Mocha', 'Chai', 'JUnit', 'PyTest', 'Postman', 'Swagger/OpenAPI',
+      'Testing Library', 'TestCafe', 'k6', 'JMeter', 'Detox'
+    ],
+    'Design, UI/UX & Audiovisual': [
+      'Figma', 'Adobe Photoshop', 'Adobe Illustrator', 'Adobe XD',
+      'Adobe Premiere Pro', 'Adobe After Effects', 'Sketch', 'CorelDRAW',
+      'Canva', 'InVision', 'Zeplin'
+    ],
+    'Game Dev & 3D/Engenharia': [
+      'Unity', 'Unreal Engine', 'Godot', 'Blender', 'Maya', '3ds Max',
+      'AutoCAD', 'SolidWorks', 'Revit', 'SketchUp', 'ZBrush'
+    ],
+    'Blockchain & Web3': [
+      'Solidity', 'Web3.js', 'Ethers.js', 'Hardhat', 'Smart Contracts',
+      'Ethereum', 'Solana', 'Polygon', 'Chainlink', 'IPFS', 'Foundry',
+      'Wagmi', 'Truffle'
+    ],
+    'Segurança': [
+      'OAuth', 'JWT', 'SAML', 'OWASP', 'Burp Suite', 'Metasploit', 'Vault',
+      'Penetration Testing'
+    ],
+    'Ferramentas, Produtividade & Gestão': [
+      'VIM', 'Neovim', 'VS Code', 'IntelliJ IDEA', 'Eclipse',
+      'Microsoft Excel', 'Microsoft Word', 'Microsoft PowerPoint',
+      'Google Workspace', 'Notion', 'Trello', 'Jira', 'Asana', 'Linear',
+      'Confluence', 'Slack', 'Microsoft Teams', 'Discord', 'SAP',
+      'Salesforce', 'Zendesk', 'ERP', 'CRM'
+    ]
+  };
+
+  // Dicionário de cores para cada categoria
+  const categoryStyles: Record<string, any> = {
+    'Linguagens de Programação': { tagBg: 'bg-sky-400/10', tagBorder: 'border-sky-400/20', text: 'text-sky-400', hoverBg: 'hover:bg-sky-400', hoverText: 'hover:text-white' },
+    'Frontend & Frameworks': { tagBg: 'bg-blue-400/10', tagBorder: 'border-blue-400/20', text: 'text-blue-400', hoverBg: 'hover:bg-blue-400', hoverText: 'hover:text-white' },
+    'Mobile & Desktop': { tagBg: 'bg-cyan-400/10', tagBorder: 'border-cyan-400/20', text: 'text-cyan-400', hoverBg: 'hover:bg-cyan-400', hoverText: 'hover:text-white' },
+    'Backend & APIs': { tagBg: 'bg-green-400/10', tagBorder: 'border-green-400/20', text: 'text-green-400', hoverBg: 'hover:bg-green-400', hoverText: 'hover:text-white' },
+    'Bancos de Dados': { tagBg: 'bg-yellow-400/10', tagBorder: 'border-yellow-400/20', text: 'text-yellow-400', hoverBg: 'hover:bg-yellow-400', hoverText: 'hover:text-black' },
+    'ORMs & BaaS': { tagBg: 'bg-orange-400/10', tagBorder: 'border-orange-400/20', text: 'text-orange-400', hoverBg: 'hover:bg-orange-400', hoverText: 'hover:text-white' },
+    'Data Science, Big Data & IA': { tagBg: 'bg-purple-400/10', tagBorder: 'border-purple-400/20', text: 'text-purple-400', hoverBg: 'hover:bg-purple-400', hoverText: 'hover:text-white' },
+    'DevOps, Cloud & Infra': { tagBg: 'bg-red-400/10', tagBorder: 'border-red-400/20', text: 'text-red-400', hoverBg: 'hover:bg-red-400', hoverText: 'hover:text-white' },
+    'Monitoramento & Observabilidade': { tagBg: 'bg-rose-400/10', tagBorder: 'border-rose-400/20', text: 'text-rose-400', hoverBg: 'hover:bg-rose-400', hoverText: 'hover:text-white' },
+    'Testes & QA': { tagBg: 'bg-teal-400/10', tagBorder: 'border-teal-400/20', text: 'text-teal-400', hoverBg: 'hover:bg-teal-400', hoverText: 'hover:text-white' },
+    'Design, UI/UX & Audiovisual': { tagBg: 'bg-fuchsia-400/10', tagBorder: 'border-fuchsia-400/20', text: 'text-fuchsia-400', hoverBg: 'hover:bg-fuchsia-400', hoverText: 'hover:text-white' },
+    'Game Dev & 3D/Engenharia': { tagBg: 'bg-indigo-400/10', tagBorder: 'border-indigo-400/20', text: 'text-indigo-400', hoverBg: 'hover:bg-indigo-400', hoverText: 'hover:text-white' },
+    'Blockchain & Web3': { tagBg: 'bg-emerald-400/10', tagBorder: 'border-emerald-400/20', text: 'text-emerald-400', hoverBg: 'hover:bg-emerald-400', hoverText: 'hover:text-white' },
+    'Segurança': { tagBg: 'bg-zinc-400/10', tagBorder: 'border-zinc-400/20', text: 'text-zinc-400', hoverBg: 'hover:bg-zinc-400', hoverText: 'hover:text-black' },
+    'Ferramentas, Produtividade & Gestão': { tagBg: 'bg-amber-400/10', tagBorder: 'border-amber-400/20', text: 'text-amber-400', hoverBg: 'hover:bg-amber-400', hoverText: 'hover:text-black' }
+  };
+
+  const techStackOptions = Object.entries(techStackCategories).flatMap(([category, techs]) => {
+    const style = categoryStyles[category];
+    return techs.map(tech => ({
+      value: tech,
+      label: tech,
+      category: category,
+      style: style
+    }));
+  }).sort((a, b) => a.label.localeCompare(b.label));
+
 
   const stepTitles = [t.cooperado.stepPersonal, t.cooperado.stepWork, t.cooperado.stepTechnical];
 
@@ -232,8 +345,18 @@ const Cooperado: React.FC = () => {
       if (!formState.email) {
         newErrors.email = t.cooperado.errorEmail;
       }
-      if (!formState.whatsapp) {
+      const wppClean = formState.whatsapp ? formState.whatsapp.replace(/\D/g, '') : '';
+
+      if (!wppClean || wppClean === '55') {
         newErrors.whatsapp = t.cooperado.errorWhatsapp;
+      } else if (wppClean.startsWith('55')) {
+        if (wppClean.length < 12 || wppClean.length > 13) {
+          newErrors.whatsapp = t.cooperado.errorWhatsappInvalid;
+        }
+      } else {
+        if (wppClean.length < 8 || wppClean.length > 15) {
+          newErrors.whatsapp = t.cooperado.errorWhatsappIntl;
+        }
       }
       if (!formState.estado) {
         newErrors.estado = t.cooperado.errorEstado;
@@ -270,8 +393,10 @@ const Cooperado: React.FC = () => {
         newErrors.nivel_profissional = t.cooperado.errorSenioridade;
       }
     } else if (stepIndex === 2) {
-      if (!formState.stack_principal) {
-        newErrors.stack_principal = t.cooperado.errorStack;
+      const selectedTechs = formState.stack_principal ? formState.stack_principal.split(', ') : [];
+
+      if (selectedTechs.length < 3) {
+        newErrors.stack_principal = t.cooperado.errorStackMin;
       }
       if (!formState.nivel_ingles) {
         newErrors.nivel_ingles = t.cooperado.errorIngles;
@@ -334,10 +459,10 @@ const Cooperado: React.FC = () => {
           if (emailExists || whatsappExists) {
             const newErrors = { ...errors };
             if (emailExists) {
-              newErrors.email = 'Este email já está registrado. Use um email diferente.';
+              newErrors.email = t.cooperado.errorEmailDuplicated;
             }
             if (whatsappExists) {
-              newErrors.whatsapp = 'Este número já está registrado.';
+              newErrors.whatsapp = t.cooperado.errorWhatsappDuplicated;
             }
             setErrors(newErrors);
             setIsValidatingStep(false);
@@ -962,20 +1087,53 @@ const Cooperado: React.FC = () => {
                   {/* ===================== ETAPA 3 ===================== */}
                   {step === 2 && (
                     <>
-                      <div>
+                    <div>
                         <label htmlFor="stack_principal" className="flex items-center gap-2 text-sm font-medium text-brand-slate mb-2">
                           <Code className="h-4 w-4" />
-                          {t.cooperado.stackLabel} <span className="text-brand-red">*</span>
+                          Ferramentas e Tecnologias <span className="text-brand-red">*</span>
                         </label>
-                        <input
-                          type="text"
+                        <Select
                           id="stack_principal"
-                          className={`w-full px-4 py-3 rounded-lg bg-brand-bg border ${errors.stack_principal ? 'border-red-500' : 'border-brand-slate/20'} focus:border-brand-red focus:bg-white focus:ring-2 focus:ring-brand-red/20 transition-all text-brand-blue`}
-                          placeholder={t.cooperado.stackPlaceholder}
-                          value={formState.stack_principal}
-                          onChange={handleChange}
+                          isMulti
+                          options={techStackOptions}
+                          value={formState.stack_principal ? formState.stack_principal.split(', ').map(tech => techStackOptions.find(opt => opt.value === tech) || { value: tech, label: tech }) : []}
+                          placeholder={t.cooperado.stackSelectPlaceholder}
+                          maxMenuHeight={220}
+                          unstyled
+                          onChange={(selectedOptions: any) => {
+                            const values = selectedOptions ? selectedOptions.map((opt: any) => opt.value).join(', ') : '';
+                            setFormState(prev => ({ ...prev, stack_principal: values }));
+                            
+                            if (errors.stack_principal && (selectedOptions?.length || 0) >= 3) {
+                              setErrors(prev => {
+                                const newErrors = { ...prev };
+                                delete newErrors.stack_principal;
+                                return newErrors;
+                              });
+                            }
+                          }}
+                          classNames={{
+                            control: (state) => `w-full px-4 py-2 min-h-[48px] rounded-lg bg-brand-bg border transition-all cursor-pointer text-brand-blue ${
+                              errors.stack_principal ? 'border-red-500' : 'border-brand-slate/20'
+                            } ${state.isFocused ? 'border-brand-red bg-white ring-2 ring-brand-red/20' : ''}`,
+                            menu: () => "bg-brand-bg mt-1 rounded-lg shadow-xl border border-brand-slate/20 z-50 overflow-hidden",
+                            menuList: () => "bg-brand-bg",
+                            
+                            option: ({ isFocused, data }: any) => `px-4 py-3 cursor-pointer transition-colors flex items-center justify-between ${
+                              isFocused ? 'bg-brand-slate/20' : ''
+                            } ${data.style ? data.style.text : 'text-brand-blue'}`,
+                            
+                            multiValue: ({ data }: any) => `${data.style?.tagBg || 'bg-brand-red/10'} rounded m-1 flex items-center border ${data.style?.tagBorder || 'border-brand-red/20'}`,
+                            multiValueLabel: ({ data }: any) => `${data.style?.text || 'text-brand-red'} px-2 py-1 text-sm font-medium`,
+                            multiValueRemove: ({ data }: any) => `${data.style?.text || 'text-brand-red'} ${data.style?.hoverBg || 'hover:bg-brand-red'} ${data.style?.hoverText || 'hover:text-white'} rounded-r px-1.5 py-1 transition-colors cursor-pointer`,
+                            
+                            placeholder: () => "text-gray-400 truncate",
+                            clearIndicator: () => "text-gray-400 hover:text-red-500 cursor-pointer p-1"
+                          }}
                         />
-                        {errors.stack_principal && <p className="text-red-500 text-sm mt-1">{errors.stack_principal}</p>}
+                        {errors.stack_principal && (
+                          <p className="text-red-500 text-sm mt-1">{errors.stack_principal}</p>
+                        )}
                       </div>
 
                       <div>

@@ -224,6 +224,7 @@ export const ptBR = {
       // Etapa 3 - Perfil Técnico
       stackLabel: 'Stack Tecnológica Principal',
       stackPlaceholder: 'Cite as 3 principais linguagens, frameworks ou ferramentas que dominam.',
+      stackSelectPlaceholder: 'Selecione no mínimo 3 opções...',
       idiomasLabel: 'Nível de Idiomas',
       idiomasPlaceholder: 'Selecione',
       inglesLabel: 'Inglês',
@@ -346,7 +347,14 @@ export const ptBR = {
       errorStack: 'Stack principal é obrigatória',
       errorIngles: 'Nível de inglês é obrigatório',
       errorEspanhol: 'Nível de espanhol é obrigatório',
+      errorWhatsappInvalid: 'Número inválido. Verifique se o número está correto!',
+      errorWhatsappIntl: 'Número de telefone internacional inválido.',
+      errorStackMin: 'Selecione pelo menos 3 tecnologias/ferramentas que você domina.',
+      errorEmailDuplicated: 'Este email já está registrado. Use um email diferente.',
+      errorWhatsappDuplicated: 'Este número já está registrado.',
     },
+
+
 
     // Footer (Omitido por brevidade)
   footer: {
