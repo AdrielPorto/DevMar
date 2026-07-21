@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Globe, Sun, Moon } from 'lucide-react';
+import { Menu, X, Globe, Sun, Moon, UserPlus } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../contexts/ThemeContext';
 import { languages, Language } from '../locales';
@@ -68,6 +68,18 @@ const Header: React.FC = () => {
                 {item.label}
               </Link>
             ))}
+
+            {/* CTA - Faça Parte */}
+            <Link
+              to="/quero-ser-cooperado"
+              className={`flex items-center gap-2 text-sm font-semibold whitespace-nowrap px-4 py-2 rounded-lg transition-colors duration-200 ${isActive('/quero-ser-cooperado')
+                ? 'bg-brand-red text-white shadow-sm'
+                : 'bg-brand-red text-white hover:bg-brand-red/90'
+                }`}
+            >
+              <UserPlus className="h-4 w-4" />
+              {t.nav.joinUs}
+            </Link>
 
             {/* Theme + Language - Desktop */}
             <div className="flex items-center gap-4">
@@ -195,6 +207,19 @@ const Header: React.FC = () => {
                 {item.label}
               </Link>
             ))}
+
+            {/* CTA - Faça Parte (Mobile) */}
+            <Link
+              to="/quero-ser-cooperado"
+              onClick={() => setIsOpen(false)}
+              className={`flex items-center justify-center gap-2 px-3 py-2 rounded-md text-base font-semibold ${isActive('/quero-ser-cooperado')
+                ? 'bg-brand-red text-white'
+                : 'bg-brand-red text-white hover:bg-brand-red/90'
+                }`}
+            >
+              <UserPlus className="h-5 w-5" />
+              {t.nav.joinUs}
+            </Link>
           </div>
         </div>
       )}

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { ptBR, enUS, Language } from '../locales';
+import { ptBR, enUS, esES, Language } from '../locales';
 
 type Translations = typeof ptBR;
 
@@ -14,6 +14,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 const translations: Record<Language, Translations> = {
   'pt-BR': ptBR,
   'en-US': enUS,
+  'es-ES': esES,
 };
 
 interface LanguageProviderProps {
@@ -24,13 +25,16 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   const [language, setLanguageState] = useState<Language>(() => {
     // Tenta recuperar do localStorage ou usa pt-BR como padrão
     const saved = localStorage.getItem('devmar-language');
-    if (saved === 'pt-BR' || saved === 'en-US') {
+    if (saved === 'pt-BR' || saved === 'en-US' || saved === 'es-ES') {
       return saved;
     }
     // Detecta idioma do navegador
     const browserLang = navigator.language;
     if (browserLang.startsWith('en')) {
       return 'en-US';
+    }
+    if (browserLang.startsWith('es')) {
+      return 'es-ES';
     }
     return 'pt-BR';
   });
